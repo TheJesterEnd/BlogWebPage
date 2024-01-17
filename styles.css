@@ -32,3 +32,22 @@ header {
   font-weight: 500;
   line-height: 20px;
 }
+
+main {
+  background: #F3F2FA;
+  display: flex;
+  /* justify-content: space-between; */
+
+}
+
+h1 {
+  color: #1A1A1F;
+
+font-size: 64px;
+font-style: normal;
+font-weight: 700;
+line-height: 72px; 
+padding-left: 89px;
+padding-top: 128px;
+}
+
