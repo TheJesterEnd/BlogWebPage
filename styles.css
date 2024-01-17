@@ -61,24 +61,93 @@ h1 {
 }
 
 .buttons {
-display: flex;
-justify-content: center;
-    align-items: center;
-gap : 24px;
-
-
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 24px;
+  padding-top: 64px;
+  padding-bottom: 64px;
 }
 
 .market {
-  color: #D6961C;
-font-size: 12px;
-font-style: normal;
-font-weight: 500;
-line-height: 16px; 
-width: 83px;
-height: 32px;
-border-radius: 30px;
-background: rgba(255, 184, 47, 0.08);
-border: none;
+  color: #d6961c;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 16px;
+  width: 83px;
+  height: 32px;
+  border-radius: 30px;
+  background: rgba(255, 184, 47, 0.08);
+  border: none;
 }
 
+.aplication {
+  color: #15c972;
+
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 16px;
+  width: 97px;
+  height: 32px;
+  border-radius: 30px;
+  background: rgba(28, 214, 125, 0.08);
+  border: none;
+}
+
+.AI {
+  color: #b71fdd;
+
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 16px;
+  width: 178px;
+  height: 32px;
+  border-radius: 30px;
+  background: rgba(177, 28, 214, 0.08);
+  border: none;
+}
+
+.UX {
+  color: #dc2828;
+
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 16px;
+  width: 65px;
+  height: 32px;
+  border-radius: 30px;
+  background: rgba(250, 87, 87, 0.08);
+  border: none;
+}
+
+.research {
+  color: #60be16;
+
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 16px;
+  width: 77px;
+  height: 32px;
+  border-radius: 30px;
+  background: rgba(112, 207, 37, 0.08);
+  border: none;
+}
+
+.Figma {
+  color: #1ac7a8;
+
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 16px;
+  width: 64px;
+  height: 32px;
+  border-radius: 30px;
+  background: rgba(8, 210, 174, 0.08);
+  border: none;
+}
