@@ -59,3 +59,26 @@ h1 {
   height: 200px;
   padding-top: 64px;
 }
+
+.buttons {
+display: flex;
+justify-content: center;
+    align-items: center;
+gap : 24px;
+
+
+}
+
+.market {
+  color: #D6961C;
+font-size: 12px;
+font-style: normal;
+font-weight: 500;
+line-height: 16px; 
+width: 83px;
+height: 32px;
+border-radius: 30px;
+background: rgba(255, 184, 47, 0.08);
+border: none;
+}
+
