@@ -35,10 +35,14 @@ header {
 
 main {
   background: #f3f2fa;
-  display: flex;
-  justify-content: space-between;
+}
+
+.minicontainer {
   padding-left: 89px;
   padding-right: 76px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 h1 {
@@ -48,16 +52,10 @@ h1 {
   font-style: normal;
   font-weight: 700;
   line-height: 72px;
-  /* padding-left: 89px; */
-  padding-top: 128px;
-  
 }
 
-
 .figures {
-  Width: 624px;
-Height: 200px;
-display: flex;
-justify-content: center;
-align-items: center;
+  width: 624px;
+  height: 200px;
+  padding-top: 64px;
 }
