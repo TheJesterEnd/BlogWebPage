@@ -27,7 +27,7 @@
         <div class="row">
           <div class="author">
             <label for="author-input">ავტორი *</label>
-            <input type="text" placeholder="შეიყვანეთ ავტორი" />
+            <input type="text" placeholder="შეიყვანეთ ავტორი" class="input" />
             <ul>
               <li>მინიმუმ 4 სიმბოლო</li>
               <li>მინიმუმ ორი სიტყვა</li>
@@ -36,9 +36,20 @@
           </div>
           <div class="title">
             <label for="title-input">სათური *</label>
-            <input type="text" placeholder="შეიყვანეთ სათაური" />
-            <p>მინიმუმ 2 სიმბოლო</p>
+            <input type="text" placeholder="შეიყვანეთ სათაური" class="input" />
+            <p class="validation-para">მინიმუმ 2 სიმბოლო</p>
           </div>
+        </div>
+        <div class="description">
+          <label for="description-input">აღწერა *</label>
+          <textarea
+            name="description"
+            id="description-input"
+            cols="30"
+            rows="10"
+            placeholder="შეიყვანეთ აღწერა"
+          ></textarea>
+          <p class="validation-para">მინიმუმ ორი სიმბოლო</p>
         </div>
       </form>
     </main>
