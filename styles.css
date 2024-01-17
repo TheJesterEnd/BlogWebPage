@@ -34,20 +34,30 @@ header {
 }
 
 main {
-  background: #F3F2FA;
+  background: #f3f2fa;
   display: flex;
-  /* justify-content: space-between; */
-
+  justify-content: space-between;
+  padding-left: 89px;
+  padding-right: 76px;
 }
 
 h1 {
-  color: #1A1A1F;
+  color: #1a1a1f;
 
-font-size: 64px;
-font-style: normal;
-font-weight: 700;
-line-height: 72px; 
-padding-left: 89px;
-padding-top: 128px;
+  font-size: 64px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 72px;
+  /* padding-left: 89px; */
+  padding-top: 128px;
+  
 }
 
+
+.figures {
+  Width: 624px;
+Height: 200px;
+display: flex;
+justify-content: center;
+align-items: center;
+}
