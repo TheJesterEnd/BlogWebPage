@@ -59,18 +59,19 @@ form {
 .row {
   display: flex;
   margin-top: 24px;
+  gap: 24px;
 }
 .author {
   display: flex;
   flex-direction: column;
 }
-.author label {
+label {
   color: #1a1a1f;
   font-size: 14px;
   font-weight: 500;
   line-height: 20px; /* 142.857% */
 }
-.author input {
+input {
   width: 288px;
   height: 44px;
   border-radius: 12px;
@@ -87,4 +88,15 @@ ul {
   font-weight: 400;
   line-height: 20px; /* 166.667% */
   margin-left: 13px;
+}
+.title {
+  display: flex;
+  flex-direction: column;
+}
+.title p {
+  margin-top: 8px;
+  color: #85858d;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 20px; /* 166.667% */
 }
