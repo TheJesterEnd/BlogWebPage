@@ -71,7 +71,7 @@ label {
   font-weight: 500;
   line-height: 20px; /* 142.857% */
 }
-.input {
+input {
   width: 288px;
   height: 44px;
   border-radius: 12px;
@@ -79,6 +79,13 @@ label {
   background: #fcfcfd;
   padding-left: 16px;
   margin-top: 8px;
+  color: #1a1a1f;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+}
+::placeholder {
+  color: #85858d;
 }
 ul {
   margin-top: 8px;
@@ -108,17 +115,42 @@ textarea {
   font-size: 14px;
   font-weight: 400;
   line-height: 20px; /* 142.857% */
+  padding: 12px 0 0 16px;
+  margin-top: 8px;
+  resize: none;
 }
-/* .description input::placeholder {
-  position: absolute;
-  top: 12px;
-  left: 16px;
-  /* padding: 12px 16px; *
-} */
+
 .validation-para {
   margin-top: 8px;
   color: #85858d;
   font-size: 12px;
   font-weight: 400;
   line-height: 20px; /* 166.667% */
+}
+.date {
+  display: flex;
+  flex-direction: column;
+}
+#date-input {
+  padding-left: 40px;
+  color: #1a1a1f;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px; /* 142.857% */
+  font-family: inherit;
+}
+input[type="date"] {
+  position: relative;
+  background: url(./images/calendar-icon.svg);
+  background-repeat: no-repeat;
+  background-position: 5%;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  right: 250px;
+  opacity: 0;
+  cursor: pointer;
 }
