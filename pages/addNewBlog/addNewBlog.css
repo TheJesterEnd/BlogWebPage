@@ -222,3 +222,21 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   background: rgba(8, 210, 174, 0.08);
   color: #1ac7a8;
 }
+.email {
+  display: flex;
+  flex-direction: column;
+  margin-top: 24px;
+}
+#email-span {
+  color: #ea1919;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 20px; /* 166.667% */
+  display: none;
+  align-items: flex-start;
+  gap: 8px;
+  margin-top: 8px;
+}
+span p {
+  width: 260px;
+}

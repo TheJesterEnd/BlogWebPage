@@ -54,24 +54,37 @@
         <div class="row">
           <div class="date">
             <label for="date-input">გამოქვეყნების თარიღი *</label>
-              <input type="date" id="date-input" />
+            <input type="date" id="date-input" />
+          </div>
+          <div class="category">
+            <label for="buttons">კატეგორია *</label>
+            <div class="category-div">
+              <h4>აირჩიეთ კატეგორია</h4>
+              <img src="images/arrow-down-icon.svg" alt="arrow-down-icon" />
             </div>
-            <div class="category">
-              <label for="buttons">კატეგორია *</label>
-              <div class="category-div">
-                <h4>აირჩიეთ კატეგორია</h4>
-                <img src="images/arrow-down-icon.svg" alt="arrow-down-icon">
-              </div>
-              <div class="drop-down_menu">
-                  <button class="category-button მარკეტი">მარკეტი</button>
-                  <button class="category-button აპლიკაცია">აპლიკაცია</button>
-                  <button class="category-button ხელოვნური-ინტელექტი">ხელოვნური ინტელექტი</button>
-                  <button class="category-button UI-UX">UI/UX</button>
-                  <button class="category-button კვლევა">კვლევა</button>
-                  <button class="category-button figma">Figma</button>
-              </div>
+            <div class="drop-down_menu">
+              <button class="category-button მარკეტი">მარკეტი</button>
+              <button class="category-button აპლიკაცია">აპლიკაცია</button>
+              <button class="category-button ხელოვნური-ინტელექტი">
+                ხელოვნური ინტელექტი
+              </button>
+              <button class="category-button UI-UX">UI/UX</button>
+              <button class="category-button კვლევა">კვლევა</button>
+              <button class="category-button figma">Figma</button>
             </div>
           </div>
+        </div>
+        <div class="email">
+          <label for="email-input">ელ-ფოსტა</label>
+          <input
+            type="text"
+            id="email-input"
+            placeholder="Example@redbery.ge"
+          />
+          <span id="email-span"
+            ><img src="images/error-icon.svg" alt="error-icon" />
+            <p>მეილი უნდა მთავრდებოდეს @redberry.ge-ით</p>
+          </span>
         </div>
       </form>
     </main>
