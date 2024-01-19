@@ -241,6 +241,7 @@ span p {
   width: 260px;
 }
 .button-div {
+  margin-top: 40px;
   display: flex;
   justify-content: flex-end;
   width: 100%;
