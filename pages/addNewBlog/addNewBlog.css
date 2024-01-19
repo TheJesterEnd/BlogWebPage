@@ -240,3 +240,24 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 span p {
   width: 260px;
 }
+.button-div {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+}
+#submit {
+  display: flex;
+  width: 288px;
+  height: 40px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+  background: #e4e3eb;
+  border: none;
+
+  color: #fff;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px; /* 142.857% */
+}
