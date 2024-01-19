@@ -120,19 +120,19 @@ h1 {
   border: none;
 }
 
-.First-card {
+.card {
   display: flex;
   align-items: flex-start;
   flex-direction: column;
   width: 408px;
   margin-left: 76px;
+  margin-top: 64px;
 }
 
 .mobile {
   width: 408px;
   height: 328px;
   border-radius: 12px;
-  margin-top: 64px;
 }
 
 .name {
@@ -140,8 +140,6 @@ h1 {
   font-size: 16px;
   font-weight: 500;
   line-height: 20px;
-  width: 96px;
-  height: 20px;
   margin-top: 24px;
 }
 .date {
@@ -157,52 +155,12 @@ h1 {
   font-size: 20px;
   font-weight: 500;
   line-height: 28px;
-  width: 408px;
   margin-top: 16px;
 }
 
 .card-buttons {
   gap: 16px;
   margin-top: 16px;
-}
-
-.card-market-common-button {
-  color: #d6961c;
-  width: 83px;
-  height: 32px;
-  background: rgba(255, 184, 47, 0.08);
-  font-size: 12px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 16px;
-  border-radius: 30px;
-  border: none;
-}
-
-.card-aplication-common-button {
-  color: #15c972;
-  width: 97px;
-  height: 32px;
-  background: rgba(28, 214, 125, 0.08);
-  font-size: 12px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 16px;
-  border-radius: 30px;
-  border: none;
-}
-
-.card-AI-common-button {
-  color: #b71fdd;
-  width: 178px;
-  height: 32px;
-  background: rgba(177, 28, 214, 0.08);
-  font-size: 12px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 16px;
-  border-radius: 30px;
-  border: none;
 }
 
 .text {
@@ -217,6 +175,7 @@ h1 {
   display: flex;
   flex-direction: row;
   margin-top: 16px;
+  gap: 4px;
 }
 
 .full-text {
@@ -225,6 +184,7 @@ h1 {
   font-style: normal;
   font-weight: 500;
   line-height: 20px;
+  font-family: inherit;
 }
 
 .arrow {
