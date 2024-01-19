@@ -177,3 +177,48 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   width: 20px;
   height: 20px;
 }
+.drop-down_menu {
+  display: flex;
+  display: none;
+  gap: 8px;
+  flex-wrap: wrap;
+  padding: 16px 27px 16px 16px;
+  margin-top: 2px;
+  width: 288px;
+  height: 144px;
+  border-radius: 12px;
+  border: 1px solid #e4e3eb;
+  background: #fff;
+  box-shadow: 2px 4px 8px 0px rgba(0, 0, 0, 0.08);
+}
+.category-button {
+  padding: 8px 16px;
+  border-radius: 30px;
+  border: none;
+  color: #fff;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 16px; /* 133.333% */
+}
+.მარკეტი {
+  background: #ffb82f;
+}
+.აპლიკაცია {
+  background: #1ac7a8;
+}
+.ხელოვნური-ინტელექტი {
+  background: #b71fdd;
+}
+.UI-UX {
+  background: rgba(250, 87, 87, 0.08);
+  color: #dc2828;
+}
+.კვლევა {
+  background: rgba(112, 207, 37, 0.08);
+  color: #60be16;
+}
+.figma {
+  background: rgba(8, 210, 174, 0.08);
+  color: #1ac7a8;
+}
