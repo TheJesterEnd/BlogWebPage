@@ -4,7 +4,7 @@ const inputFile = document.querySelector("#input-file");
 const imgUploadContainer = document.querySelector(".img-upload-container");
 const fileNameP = document.querySelector("#file-name_p");
 const remove = document.querySelector("#remove");
-
+//-----------------------------------------------------------This is where the logic of drag and drop begins
 inputFile.addEventListener("change", (event) => {
   fileNameP.textContent = event.target.files[0].name;
   dropFile();
@@ -29,6 +29,7 @@ function removeFile() {
   imgUploadContainer.style.display = "none";
   fileBox.style.display = "flex";
 }
+//-------------------------------------------------This is where the validation of the author's input begins
 const authorInput = document.querySelector("#author-input");
 const fourSymbol = document.querySelector("#four-symbol");
 const twoWord = document.querySelector("#two-word");
