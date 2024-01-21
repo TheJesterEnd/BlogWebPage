@@ -29,7 +29,65 @@ function removeFile() {
   imgUploadContainer.style.display = "none";
   fileBox.style.display = "flex";
 }
+const authorInput = document.querySelector("#author-input");
+const fourSymbol = document.querySelector("#four-symbol");
+const twoWord = document.querySelector("#two-word");
+const georgian = document.querySelector("#georgian");
 
+authorInput.addEventListener("input", authorValidation);
+authorInput.addEventListener("change", authorValidationFinal);
+
+const georgianRegex = /[\u10A0-\u10EA\u10FC\u10EE\u10EB]/;
+let isValidLength = false;
+let isValidGeorgian = false;
+function authorValidation() {
+  if (authorInput.value.trim().length > 3) {
+    fourSymbol.style.color = "#14D81C";
+    isValidLength = true;
+  } else {
+    fourSymbol.style.color = "#85858D";
+    isValidLength = false;
+  }
+  if (georgianRegex.test(authorInput.value)) {
+    georgian.style.color = "#14D81C";
+    isValidGeorgian = true;
+  } else {
+    georgian.style.color = "#85858D";
+    isValidGeorgian = false;
+  }
+  if (authorInput.value.trimStart().includes(" ")) {
+    twoWord.style.color = "#14D81C";
+  } else {
+    twoWord.style.color = "#85858D";
+    isTwoWord = false;
+  }
+}
+function authorValidationFinal() {
+  if (isValidLength && isValidGeorgian) {
+    authorInput.style.border = "1px solid #14D81C";
+    [twoWord, georgian, fourSymbol].forEach(
+      (li) => (li.style.color = "#85858D")
+    );
+  } else {
+    authorInput.style.border = "1px solid #EA1919";
+    authorInput.style.background = "#FAF2F3";
+    if (isValidLength) {
+      fourSymbol.style.color = "#85858D";
+    } else {
+      fourSymbol.style.color = "red";
+    }
+    if (isValidGeorgian) {
+      georgian.style.color = "#85858D";
+    } else {
+      georgian.style.color = "red";
+    }
+    if (authorInput.value.trim().includes(" ")) {
+      twoWord.style.color = "#85858D";
+    } else {
+      twoWord.style.color = "red";
+    }
+  }
+}
 // const dateInput = document.querySelector("#date-input");
 // dateInput.addEventListener("change", () => {
 //   let date = new Date();
