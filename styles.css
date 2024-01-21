@@ -32,6 +32,7 @@ header {
   font-size: 14px;
   font-weight: 500;
   line-height: 20px;
+  border: none;
 }
 
 main {
@@ -185,6 +186,7 @@ h1 {
   font-weight: 500;
   line-height: 20px;
   font-family: inherit;
+  border: none;
 }
 
 .arrow {
