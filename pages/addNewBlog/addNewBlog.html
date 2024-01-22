@@ -37,7 +37,6 @@
             <input
               type="text"
               placeholder="შეიყვანეთ ავტორი"
-              class="input"
               id="author-input"
             />
             <ul>
@@ -47,9 +46,15 @@
             </ul>
           </div>
           <div class="title">
-            <label for="title-input">სათური *</label>
-            <input type="text" placeholder="შეიყვანეთ სათაური" class="input" />
-            <p class="validation-para">მინიმუმ 2 სიმბოლო</p>
+            <label for="title-input">სათაური *</label>
+            <input
+              type="text"
+              placeholder="შეიყვანეთ სათაური"
+              id="title-input"
+            />
+            <p class="validation-para" id="title-input_para">
+              მინიმუმ 2 სიმბოლო
+            </p>
           </div>
         </div>
         <div class="description">
@@ -61,7 +66,9 @@
             rows="10"
             placeholder="შეიყვანეთ აღწერა"
           ></textarea>
-          <p class="validation-para">მინიმუმ ორი სიმბოლო</p>
+          <p class="validation-para" id="description-input_para">
+            მინიმუმ ორი სიმბოლო
+          </p>
         </div>
         <div class="row">
           <div class="date">

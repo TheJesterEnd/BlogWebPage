@@ -60,35 +60,62 @@ function authorValidation() {
     twoWord.style.color = "#14D81C";
   } else {
     twoWord.style.color = "#85858D";
-    isTwoWord = false;
   }
 }
 function authorValidationFinal() {
   if (isValidLength && isValidGeorgian) {
     authorInput.style.border = "1px solid #14D81C";
-    [twoWord, georgian, fourSymbol].forEach(
-      (li) => (li.style.color = "#85858D")
-    );
+    authorInput.style.background = "#F8FFF8"[
+      (twoWord, georgian, fourSymbol)
+    ].forEach((li) => (li.style.color = "#85858D"));
   } else {
     authorInput.style.border = "1px solid #EA1919";
     authorInput.style.background = "#FAF2F3";
     if (isValidLength) {
       fourSymbol.style.color = "#85858D";
     } else {
-      fourSymbol.style.color = "red";
+      fourSymbol.style.color = "#14D81C";
     }
     if (isValidGeorgian) {
       georgian.style.color = "#85858D";
     } else {
-      georgian.style.color = "red";
+      georgian.style.color = "#14D81C";
     }
     if (authorInput.value.trim().includes(" ")) {
       twoWord.style.color = "#85858D";
     } else {
-      twoWord.style.color = "red";
+      twoWord.style.color = "#14D81C";
     }
   }
 }
+//----------------------------------------------------------------This is where title validation begins
+const titleInput = document.querySelector("#title-input");
+const titleInputPara = document.querySelector("#title-input_para");
+titleInput.addEventListener("input", () =>
+  titleValidation(titleInput, titleInputPara)
+);
+titleInput.addEventListener("change", () =>
+  titleValidationFinal(titleInput, titleInputPara)
+);
+
+function titleValidation(input, inputPara) {
+  if (input.value.trim().length > 1) {
+    inputPara.style.color = "#14D81C";
+  } else {
+    inputPara.style.color = "#85858D";
+  }
+}
+
+function titleValidationFinal(input, inputPara) {
+  if (input.value.trim().length > 1) {
+    inputPara.style.color = "#85858D";
+    input.style.border = "1px solid #14D81C";
+  } else {
+    inputPara.style.color = "#EA1919";
+    input.style.border = "1px solid #EA1919";
+  }
+}
+
 // const dateInput = document.querySelector("#date-input");
 // dateInput.addEventListener("change", () => {
 //   let date = new Date();
