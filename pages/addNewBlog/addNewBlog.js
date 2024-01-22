@@ -125,6 +125,21 @@ descriptionInput.addEventListener("input", () =>
 descriptionInput.addEventListener("change", () =>
   titleValidationFinal(descriptionInput, descriptionInputPara)
 );
+
+const arrowIcon = document.querySelector("#arrow-icon");
+const dropDown = document.querySelector(".drop-down_menu");
+arrowIcon.addEventListener("click", dropDownMenu);
+let isClicked = false;
+
+function dropDownMenu() {
+  if (!isClicked) {
+    dropDown.style.display = "flex";
+    isClicked = true;
+  } else {
+    dropDown.style.display = "none";
+    isClicked = false;
+  }
+}
 // const dateInput = document.querySelector("#date-input");
 // dateInput.addEventListener("change", () => {
 //   let date = new Date();
