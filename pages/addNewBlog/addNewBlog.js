@@ -115,7 +115,16 @@ function titleValidationFinal(input, inputPara) {
     input.style.border = "1px solid #EA1919";
   }
 }
+//-----------------------------------------------------------Here I just added an event listener to the description input
+const descriptionInput = document.querySelector("#description-input");
+const descriptionInputPara = document.querySelector("#description-input_para");
 
+descriptionInput.addEventListener("input", () =>
+  titleValidation(descriptionInput, descriptionInputPara)
+);
+descriptionInput.addEventListener("change", () =>
+  titleValidationFinal(descriptionInput, descriptionInputPara)
+);
 // const dateInput = document.querySelector("#date-input");
 // dateInput.addEventListener("change", () => {
 //   let date = new Date();
