@@ -39,6 +39,7 @@ authorInput.addEventListener("input", authorValidation);
 authorInput.addEventListener("change", authorValidationFinal);
 
 const georgianRegex = /[\u10A0-\u10EA\u10FC\u10EE\u10EB]/;
+
 let isValidLength = false;
 let isValidGeorgian = false;
 function authorValidation() {
@@ -65,26 +66,27 @@ function authorValidation() {
 function authorValidationFinal() {
   if (isValidLength && isValidGeorgian) {
     authorInput.style.border = "1px solid #14D81C";
-    authorInput.style.background = "#F8FFF8"[
-      (twoWord, georgian, fourSymbol)
-    ].forEach((li) => (li.style.color = "#85858D"));
+    authorInput.style.background = "#F8FFF8";
+    [twoWord, georgian, fourSymbol].forEach(
+      (li) => (li.style.color = "#85858D")
+    );
   } else {
     authorInput.style.border = "1px solid #EA1919";
     authorInput.style.background = "#FAF2F3";
     if (isValidLength) {
       fourSymbol.style.color = "#85858D";
     } else {
-      fourSymbol.style.color = "#14D81C";
+      fourSymbol.style.color = "#EA1919";
     }
     if (isValidGeorgian) {
       georgian.style.color = "#85858D";
     } else {
-      georgian.style.color = "#14D81C";
+      georgian.style.color = "#EA1919";
     }
     if (authorInput.value.trim().includes(" ")) {
       twoWord.style.color = "#85858D";
     } else {
-      twoWord.style.color = "#14D81C";
+      twoWord.style.color = "#EA1919";
     }
   }
 }
@@ -140,9 +142,25 @@ function dropDownMenu() {
     isClicked = false;
   }
 }
+const emailInput = document.querySelector("#email-input");
+const emailInputPara = document.querySelector("#email-span");
+const emailPattern = /^[\w.-]+@redberry\.ge$/;
+
+emailInput.addEventListener("change", emailValidation);
+function emailValidation() {
+  if (emailPattern.test(emailInput.value)) {
+    emailInput.style.border = "1px solid #14D81C";
+    emailInputPara.style.display = "none";
+  } else {
+    emailInputPara.style.display = "flex";
+    emailInput.style.border = "1px solid #EA1919";
+  }
+}
 // const dateInput = document.querySelector("#date-input");
 // dateInput.addEventListener("change", () => {
 //   let date = new Date();
 //   let newData = new Date(dateInput.value);
+//   console.log(date);
+//   console.log(newData);
 //   console.log(date > newData);
 // });
