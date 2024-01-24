@@ -1,0 +1,249 @@
+@import url("https://free.bboxtype.com/embedfonts/?family=FiraGO:400,500,700");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "FiraGO", sans-serif;
+  min-height: 100vh;
+  background: #f3f2fa;
+  width: 1440px;
+}
+
+header {
+  border-bottom: 1px solid #e4e3eb;
+  background: #fff;
+  display: flex;
+  padding: 20px 76px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.enter {
+  width: 93px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+  background: #5d37f3;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+}
+
+main {
+  background: #f3f2fa;
+  display: flex;
+  flex-direction: column;
+}
+
+.main-fist-part {
+  display: flex;
+  justify-content: space-between;
+}
+.first-arrow {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  margin-left: 76px;
+  margin-top: 40px;
+  border: none;
+}
+
+.main-photo {
+  width: 720px;
+  height: 328px;
+  margin-top: 40px;
+  margin-right: 360px;
+}
+
+.name-under-the-photo {
+  color: #1a1a1f;
+
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 20px;
+  width: 164px;
+  margin-left: 360px;
+  margin-top: 40px;
+}
+
+.date-under-the-photo {
+  color: #85858d;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 16px;
+  margin-left: 360px;
+  margin-top: 8px;
+}
+
+h1 {
+  color: #1a1a1f;
+  font-family: FiraGO;
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 40px;
+  width: 720px;
+  margin-left: 360px;
+  margin-top: 24px;
+}
+
+.card-buttons {
+  margin-top: 24px;
+  gap: 16px;
+  margin-left: 360px;
+}
+
+.common-button {
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 16px;
+  border-radius: 30px;
+  border: none;
+}
+
+.market {
+  color: #d6961c;
+  width: 83px;
+  height: 32px;
+  background: rgba(255, 184, 47, 0.08);
+}
+
+.aplication {
+  color: #15c972;
+  width: 97px;
+  height: 32px;
+  background: rgba(28, 214, 125, 0.08);
+}
+
+.AI {
+  color: #b71fdd;
+  width: 178px;
+  height: 32px;
+  background: rgba(177, 28, 214, 0.08);
+}
+
+.main-text {
+  color: #404049;
+  font-family: FiraGO;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 28px;
+  width: 720px;
+  margin-top: 40px;
+  margin-left: 360px;
+}
+
+.title-arrow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 76px;
+  padding-top: 98px;
+  padding-right: 76px;
+}
+
+.similar-articles {
+  color: #1a1a1f;
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 40px;
+}
+
+.arrows {
+  display: flex;
+  flex-direction: row-reverse;
+  gap: 24px;
+}
+
+.arrow-right {
+  border: none;
+}
+
+.arrow-left {
+  border: none;
+}
+
+.card {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  width: 408px;
+  margin-left: 76px;
+  margin-top: 40px;
+}
+
+.mobile {
+  width: 408px;
+  height: 328px;
+  border-radius: 12px;
+}
+
+.name {
+  color: #1a1a1f;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 20px;
+  margin-top: 24px;
+}
+.date {
+  color: #85858d;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 16px;
+  margin-top: 8px;
+}
+
+h3 {
+  color: #1a1a1f;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 28px;
+  margin-top: 16px;
+}
+
+.first-card-buttons {
+  gap: 16px;
+  margin-top: 16px;
+  display: flex;
+}
+
+.text {
+  color: #404049;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 28px;
+  margin-top: 16px;
+}
+
+.last-part {
+  display: flex;
+  align-items: center;
+  margin-top: 16px;
+  gap: 4px;
+}
+
+.full-text {
+  color: #5d37f3;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 20px;
+  font-family: inherit;
+  border:  none;
+}
+
+.arrow {
+  width: 20px;
+  height: 20px;
+}
