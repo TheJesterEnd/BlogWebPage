@@ -156,6 +156,33 @@ function emailValidation() {
     emailInput.style.border = "1px solid #EA1919";
   }
 }
+const dropDownMenuContent = document.querySelector(".drop-down_menu");
+const categoryDiv = document.querySelector(".category-div");
+async function getCategories() {
+  try {
+    const response = await fetch(
+      "https://george.pythonanywhere.com/api/categories/"
+    );
+    if (!response.ok) throw new Error("failed to fetch data");
+    const data = await response.json();
+    for (let i = 0; i < data.length; i++) {
+      const button = document.createElement("button");
+      button.className = `category-button ${data[i].title}`;
+      button.textContent = data[i].title;
+      dropDownMenuContent.appendChild(button);
+    }
+    dropDownMenuContent.addEventListener("click", (event) => {
+      if (event.target.classList.contains("category-button")) {
+        event.preventDefault();
+        // categoryDiv.appendChild(event.target);
+        // console.log(event.target);
+      }
+    });
+  } catch (error) {
+    console.log(error.message);
+  }
+}
+getCategories();
 // const dateInput = document.querySelector("#date-input");
 // dateInput.addEventListener("change", () => {
 //   let date = new Date();
