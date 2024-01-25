@@ -158,6 +158,7 @@ function emailValidation() {
 }
 const dropDownMenuContent = document.querySelector(".drop-down_menu");
 const categoryDiv = document.querySelector(".category-div");
+const h4 = document.querySelector("h4");
 async function getCategories() {
   try {
     const response = await fetch(
@@ -171,13 +172,38 @@ async function getCategories() {
       button.textContent = data[i].title;
       dropDownMenuContent.appendChild(button);
     }
-    dropDownMenuContent.addEventListener("click", (event) => {
-      if (event.target.classList.contains("category-button")) {
+    const arrayHtml = Array.from(dropDownMenuContent.children);
+    let count = 0;
+    for (let i = 0; i < arrayHtml.length; i++) {
+      arrayHtml[i].addEventListener("click", (event) => {
         event.preventDefault();
-        // categoryDiv.appendChild(event.target);
-        // console.log(event.target);
-      }
-    });
+
+        h4.style.display = "none";
+
+        const duplicateButton = event.target.cloneNode(true);
+        // Create the X icon
+        const closeButton = document.createElement("span");
+        closeButton.textContent = "X";
+        closeButton.className = "close-button";
+
+        // Append the "X" to the cloned button
+        duplicateButton.appendChild(closeButton);
+
+        // Append the cloned button to the categoryDiv
+        categoryDiv.appendChild(duplicateButton);
+
+        duplicateButton.removeEventListener("click", getCategories);
+
+        // Add click event listener to the X icon for removal
+        closeButton.addEventListener("click", () => {
+          console.log(categoryDiv.children.length);
+          categoryDiv.removeChild(duplicateButton);
+          if (categoryDiv.children.length === 2) {
+            h4.style.display = "block";
+          }
+        });
+      });
+    }
   } catch (error) {
     console.log(error.message);
   }
