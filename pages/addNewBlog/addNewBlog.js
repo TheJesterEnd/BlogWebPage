@@ -159,6 +159,7 @@ function emailValidation() {
 const dropDownMenuContent = document.querySelector(".drop-down_menu");
 const categoryDiv = document.querySelector(".category-div");
 const h4 = document.querySelector("h4");
+const categoriesData = [];
 async function getCategories() {
   try {
     const response = await fetch(
@@ -166,18 +167,16 @@ async function getCategories() {
     );
     if (!response.ok) throw new Error("failed to fetch data");
     const data = await response.json();
-    for (let i = 0; i < data.length; i++) {
+    for (let i = 0; i < data.length - 1; i++) {
       const button = document.createElement("button");
       button.className = `category-button ${data[i].title}`;
       button.textContent = data[i].title;
       dropDownMenuContent.appendChild(button);
-    }
-    const arrayHtml = Array.from(dropDownMenuContent.children);
-    let count = 0;
-    for (let i = 0; i < arrayHtml.length; i++) {
-      arrayHtml[i].addEventListener("click", (event) => {
-        event.preventDefault();
+      let clicked = false;
 
+      button.addEventListener("click", (event) => {
+        event.preventDefault();
+        console.log(categoriesData);
         h4.style.display = "none";
 
         const duplicateButton = event.target.cloneNode(true);
@@ -190,14 +189,19 @@ async function getCategories() {
         duplicateButton.appendChild(closeButton);
 
         // Append the cloned button to the categoryDiv
-        categoryDiv.appendChild(duplicateButton);
-
+        if (!clicked) {
+          categoryDiv.appendChild(duplicateButton);
+          categoriesData.push(data[i]);
+        }
+        clicked = true;
         duplicateButton.removeEventListener("click", getCategories);
 
         // Add click event listener to the X icon for removal
         closeButton.addEventListener("click", () => {
-          console.log(categoryDiv.children.length);
+          clicked = false;
           categoryDiv.removeChild(duplicateButton);
+          categoriesData.pop(data[i]);
+          console.log(categoriesData);
           if (categoryDiv.children.length === 2) {
             h4.style.display = "block";
           }

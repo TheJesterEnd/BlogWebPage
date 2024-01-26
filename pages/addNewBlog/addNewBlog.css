@@ -183,12 +183,12 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   overflow-x: auto;
   overflow-y: hidden;
 }
-.category-div::-webkit-scrollbar-thumb {
-  border-radius: 5px;
+.category-div::-webkit-scrollbar {
+  width: 0;
+  height: 4px;
+  background-color: gray;
 }
-.category-div::-webkit-scrollbar-track {
-  background-color: red;
-}
+
 .category-div h4 {
   color: #85858d;
   font-size: 14px;
