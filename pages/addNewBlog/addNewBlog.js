@@ -5,8 +5,10 @@ const imgUploadContainer = document.querySelector(".img-upload-container");
 const fileNameP = document.querySelector("#file-name_p");
 const remove = document.querySelector("#remove");
 //-----------------------------------------------------------This is where the logic of drag and drop begins
+let imgUrl;
 inputFile.addEventListener("change", (event) => {
   fileNameP.textContent = event.target.files[0].name;
+  imgUrl = URL.createObjectURL(event.target.files[0]);
   dropFile();
 });
 
@@ -15,6 +17,7 @@ inputFile.addEventListener("change", (event) => {
 });
 dropArea.addEventListener("drop", (event) => {
   fileNameP.textContent = event.dataTransfer.files[0].name;
+  imgUrl = URL.createObjectURL(event.dataTransfer.files[0]);
   dropFile();
 });
 
@@ -23,11 +26,13 @@ remove.addEventListener("click", removeFile);
 function dropFile() {
   fileBox.style.display = "none";
   imgUploadContainer.style.display = "flex";
+  localStorage.setItem("imgUrl", imgUrl);
 }
 
 function removeFile() {
   imgUploadContainer.style.display = "none";
   fileBox.style.display = "flex";
+  localStorage.removeItem("imgUrl");
 }
 //-------------------------------------------------This is where the validation of the author's input begins
 const authorInput = document.querySelector("#author-input");
@@ -42,6 +47,8 @@ const georgianRegex = /[\u10A0-\u10EA\u10FC\u10EE\u10EB]/;
 
 let isValidLength = false;
 let isValidGeorgian = false;
+let isTwoWord = false;
+let authorValue;
 function authorValidation() {
   if (authorInput.value.trim().length > 3) {
     fourSymbol.style.color = "#14D81C";
@@ -59,12 +66,15 @@ function authorValidation() {
   }
   if (authorInput.value.trimStart().includes(" ")) {
     twoWord.style.color = "#14D81C";
+    isTwoWord = true;
   } else {
     twoWord.style.color = "#85858D";
+    isTwoWord = false;
   }
 }
 function authorValidationFinal() {
-  if (isValidLength && isValidGeorgian) {
+  if (isValidLength && isValidGeorgian && isTwoWord) {
+    authorValue = authorInput.value.trim();
     authorInput.style.border = "1px solid #14D81C";
     authorInput.style.background = "#F8FFF8";
     [twoWord, georgian, fourSymbol].forEach(
@@ -145,10 +155,11 @@ function dropDownMenu() {
 const emailInput = document.querySelector("#email-input");
 const emailInputPara = document.querySelector("#email-span");
 const emailPattern = /^[\w.-]+@redberry\.ge$/;
-
+let emailValue;
 emailInput.addEventListener("change", emailValidation);
 function emailValidation() {
   if (emailPattern.test(emailInput.value)) {
+    emailValue = emailInput.value;
     emailInput.style.border = "1px solid #14D81C";
     emailInputPara.style.display = "none";
   } else {
@@ -215,7 +226,12 @@ async function getCategories() {
     console.log(error.message);
   }
 }
+
 getCategories();
+//authorValue
+// emailValue;
+// localStorage.getItem("imgUrl")
+
 // const dateInput = document.querySelector("#date-input");
 // dateInput.addEventListener("change", () => {
 //   let date = new Date();
