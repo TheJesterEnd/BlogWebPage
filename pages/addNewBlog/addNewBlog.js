@@ -103,12 +103,14 @@ function authorValidationFinal() {
 //----------------------------------------------------------------This is where title validation begins
 const titleInput = document.querySelector("#title-input");
 const titleInputPara = document.querySelector("#title-input_para");
+let titleValue;
 titleInput.addEventListener("input", () =>
   titleValidation(titleInput, titleInputPara)
 );
-titleInput.addEventListener("change", () =>
-  titleValidationFinal(titleInput, titleInputPara)
-);
+titleInput.addEventListener("change", () => {
+  titleValidationFinal(titleInput, titleInputPara);
+  titleValue = titleInput.value.trim();
+});
 
 function titleValidation(input, inputPara) {
   if (input.value.trim().length > 1) {
@@ -130,13 +132,14 @@ function titleValidationFinal(input, inputPara) {
 //-----------------------------------------------------------Here I just added an event listener to the description input
 const descriptionInput = document.querySelector("#description-input");
 const descriptionInputPara = document.querySelector("#description-input_para");
-
+let descriptionValue;
 descriptionInput.addEventListener("input", () =>
   titleValidation(descriptionInput, descriptionInputPara)
 );
-descriptionInput.addEventListener("change", () =>
-  titleValidationFinal(descriptionInput, descriptionInputPara)
-);
+descriptionInput.addEventListener("change", () => {
+  titleValidationFinal(descriptionInput, descriptionInputPara);
+  descriptionValue = descriptionInput.value.trim();
+});
 
 const arrowIcon = document.querySelector("#arrow-icon");
 const dropDown = document.querySelector(".drop-down_menu");
@@ -228,15 +231,15 @@ async function getCategories() {
 }
 
 getCategories();
+const dateInput = document.querySelector("#date-input");
+let dateValue;
+dateInput.addEventListener("change", () => {
+  dateValue = dateInput.value;
+});
+
 //authorValue
 // emailValue;
 // localStorage.getItem("imgUrl")
-
-// const dateInput = document.querySelector("#date-input");
-// dateInput.addEventListener("change", () => {
-//   let date = new Date();
-//   let newData = new Date(dateInput.value);
-//   console.log(date);
-//   console.log(newData);
-//   console.log(date > newData);
-// });
+//descriptionValue
+//titleValue
+//dateValue
