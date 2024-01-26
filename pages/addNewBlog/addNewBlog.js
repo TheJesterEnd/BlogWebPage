@@ -193,6 +193,9 @@ async function getCategories() {
           categoryDiv.appendChild(duplicateButton);
           categoriesData.push(data[i]);
         }
+        categoryDiv.addEventListener("click", (event) =>
+          event.preventDefault()
+        );
         clicked = true;
         duplicateButton.removeEventListener("click", getCategories);
 
