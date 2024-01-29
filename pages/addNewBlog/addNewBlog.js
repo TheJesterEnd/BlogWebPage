@@ -181,7 +181,7 @@ async function getCategories() {
     );
     if (!response.ok) throw new Error("failed to fetch data");
     const data = await response.json();
-    for (let i = 0; i < data.length - 1; i++) {
+    for (let i = 0; i < data.length - 2; i++) {
       const button = document.createElement("button");
       button.className = `category-button ${data[i].title}`;
       button.textContent = data[i].title;

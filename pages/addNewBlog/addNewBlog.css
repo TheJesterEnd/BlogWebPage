@@ -168,8 +168,10 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   opacity: 0;
   cursor: pointer;
 }
-.category-div {
+.category-box {
   position: relative;
+}
+.category-div {
   display: flex;
   align-items: center;
   gap: 8px;
@@ -226,6 +228,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   border: none;
   color: #fff;
   font-family: inherit;
+
   font-size: 12px;
   font-weight: 500;
   line-height: 16px; /* 133.333% */

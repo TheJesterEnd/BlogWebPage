@@ -47,7 +47,7 @@ main {
   margin-top: 64px;
 }
 
-h1 {
+.minicontainer h1 {
   color: #1a1a1f;
   font-size: 64px;
   font-style: normal;
@@ -114,13 +114,17 @@ h1 {
 
 .common-button {
   font-size: 12px;
-  font-style: normal;
   font-weight: 500;
+  padding: 6px 10px;
   line-height: 16px;
   border-radius: 30px;
   border: none;
+  font-family: inherit;
 }
-
+.card-box {
+  display: flex;
+  flex-wrap: wrap;
+}
 .card {
   display: flex;
   align-items: flex-start;
@@ -160,6 +164,7 @@ h1 {
 }
 
 .card-buttons {
+  display: flex;
   gap: 16px;
   margin-top: 16px;
 }
