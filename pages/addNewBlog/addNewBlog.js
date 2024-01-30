@@ -187,25 +187,29 @@ async function getCategories() {
     for (let i = 0; i < data.length - 2; i++) {
       const button = document.createElement("div");
       button.className = "button-container";
+      button.style.color = data[i].text_color;
       button.innerHTML += `
           <div class="button-background" style="background:${data[i].background_color}"></div>
-          <button class="my-button category-button" style="color:${data[i].text_color}">${data[i].title}</button>
+          <button class="my-button category-button">${data[i].title}</button>
         `;
       dropDownMenuContent.appendChild(button);
       let clicked = false;
 
       button.addEventListener("click", (event) => {
         event.preventDefault();
+        button.firstElementChild.style.opacity = "1";
+        button.style.color = "white";
         h4.style.display = "none";
 
-        const duplicateButton = event.target.cloneNode(true);
+        const duplicateButton = event.target.parentElement.cloneNode(true);
+        // duplicateButton.className = "duplicate-button";
         // Create the X icon
         const closeButton = document.createElement("span");
         closeButton.textContent = "X";
         closeButton.className = "close-button";
 
         // Append the "X" to the cloned button
-        duplicateButton.appendChild(closeButton);
+        duplicateButton.lastElementChild.appendChild(closeButton);
 
         // Append the cloned button to the categoryDiv
         if (!clicked) {
@@ -219,7 +223,11 @@ async function getCategories() {
         duplicateButton.removeEventListener("click", getCategories);
 
         // Add click event listener to the X icon for removal
+        console.log(event.target.parentElement);
         closeButton.addEventListener("click", () => {
+          button.firstElementChild.style.opacity = "0.08";
+          button.style.color = data[i].text_color;
+          console.log("in");
           clicked = false;
           categoryDiv.removeChild(duplicateButton);
           categoriesData.pop(data[i]);
