@@ -206,8 +206,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   left: 251px;
   z-index: 3;
 }
-.category-div img {
-}
+
 .drop-down_email {
   display: flex;
   gap: 24px;
