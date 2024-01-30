@@ -149,9 +149,11 @@ let isClicked = false;
 function dropDownMenu() {
   if (!isClicked) {
     dropDown.style.display = "flex";
+    arrowIcon.style.transform = "rotate(180deg)";
     isClicked = true;
   } else {
     dropDown.style.display = "none";
+    arrowIcon.style.transform = "rotate(360deg)";
     isClicked = false;
   }
 }
@@ -170,6 +172,7 @@ function emailValidation() {
     emailInput.style.border = "1px solid #EA1919";
   }
 }
+//-----------------------
 const dropDownMenuContent = document.querySelector(".drop-down_menu");
 const categoryDiv = document.querySelector(".category-div");
 const h4 = document.querySelector("h4");
@@ -182,15 +185,17 @@ async function getCategories() {
     if (!response.ok) throw new Error("failed to fetch data");
     const data = await response.json();
     for (let i = 0; i < data.length - 2; i++) {
-      const button = document.createElement("button");
-      button.className = `category-button ${data[i].title}`;
-      button.textContent = data[i].title;
+      const button = document.createElement("div");
+      button.className = "button-container";
+      button.innerHTML += `
+          <div class="button-background" style="background:${data[i].background_color}"></div>
+          <button class="my-button category-button" style="color:${data[i].text_color}">${data[i].title}</button>
+        `;
       dropDownMenuContent.appendChild(button);
       let clicked = false;
 
       button.addEventListener("click", (event) => {
         event.preventDefault();
-        console.log(categoriesData);
         h4.style.display = "none";
 
         const duplicateButton = event.target.cloneNode(true);
