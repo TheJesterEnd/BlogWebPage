@@ -215,6 +215,7 @@ async function getCategories() {
         if (!clicked) {
           categoryDiv.appendChild(duplicateButton);
           categoriesData.push(data[i]);
+          console.log(categoriesData);
         }
         categoryDiv.addEventListener("click", (event) =>
           event.preventDefault()
@@ -223,15 +224,14 @@ async function getCategories() {
         duplicateButton.removeEventListener("click", getCategories);
 
         // Add click event listener to the X icon for removal
-        console.log(event.target.parentElement);
         closeButton.addEventListener("click", () => {
           button.firstElementChild.style.opacity = "0.08";
           button.style.color = data[i].text_color;
-          console.log("in");
           clicked = false;
           categoryDiv.removeChild(duplicateButton);
-          categoriesData.pop(data[i]);
-          console.log(categoriesData);
+          if (categoriesData.indexOf(data[i]) !== -1) {
+            categoriesData.splice(categoriesData.indexOf(data[i]), 1);
+          }
           if (categoryDiv.children.length === 2) {
             h4.style.display = "block";
           }
