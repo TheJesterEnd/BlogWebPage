@@ -81,28 +81,24 @@ document.addEventListener("DOMContentLoaded", () => {
       }
       closeButtonSpan.addEventListener("click", (event) => {
         for (let j = 0; j < dropDownMenuContent.children.length; j++) {
-          console.log(
-            event.target.previousSibling.textContent.trim(),
-            dropDownMenuContent.children[j].textContent.trim()
-          );
-
           if (
             event.target.previousSibling.textContent.trim() ===
             dropDownMenuContent.children[j].textContent.trim()
           ) {
+            const obj = storedCategoriesData.find(
+              (categoryObj) =>
+                categoryObj.title ===
+                event.target.previousSibling.textContent.trim()
+            );
             dropDownMenuContent.children[j].firstElementChild.style.opacity =
               "0.08";
-            dropDownMenuContent.children[j].style.color =
-              storedCategoriesData[i].text_color;
+            dropDownMenuContent.children[j].style.color = obj.text_color;
           }
         }
         categoryDiv.removeChild(button);
-        console.log(typeof event.target.previousElementSibling);
         const indexToRemove = storedCategoriesData.findIndex((item) => {
-          console.log(item.title, event.target.previousSibling);
           return item.title === event.target.previousSibling.textContent;
         });
-        console.log(indexToRemove);
         if (indexToRemove !== -1) {
           storedCategoriesData.splice(indexToRemove, 1);
           localStorage.setItem(
@@ -304,7 +300,6 @@ function dropDownMenu() {
   }
 }
 
-const categoriesData = [];
 async function getCategories() {
   try {
     const response = await fetch(
@@ -325,59 +320,66 @@ async function getCategories() {
       if (storedCategoriesData.find((obj) => obj.title === data[i].title)) {
         button.firstElementChild.style.opacity = "1";
         button.style.color = "white";
-      } else {
-        let clicked = false;
-
-        button.addEventListener("click", (event) => {
-          event.preventDefault();
-          button.firstElementChild.style.opacity = "1";
-          button.style.color = "white";
-          h4.style.display = "none";
-
-          const duplicateButton = event.target.parentElement.cloneNode(true);
-          // duplicateButton.className = "duplicate-button";
-          // Create the X icon
-          const closeButton = document.createElement("span");
-          closeButton.textContent = "X";
-          closeButton.className = "close-button";
-
-          // Append the "X" to the cloned button
-          duplicateButton.lastElementChild.appendChild(closeButton);
-
-          // Append the cloned button to the categoryDiv
-          if (!clicked) {
-            categoryDiv.appendChild(duplicateButton);
-            categoriesData.push(data[i]);
-            localStorage.setItem(
-              "categoriesData",
-              JSON.stringify(categoriesData)
-            );
-          }
-          categoryDiv.addEventListener("click", (event) =>
-            event.preventDefault()
-          );
-          clicked = true;
-          duplicateButton.removeEventListener("click", getCategories);
-
-          // Add click event listener to the X icon for removal
-          closeButton.addEventListener("click", () => {
-            button.firstElementChild.style.opacity = "0.08";
-            button.style.color = data[i].text_color;
-            clicked = false;
-            categoryDiv.removeChild(duplicateButton);
-            if (categoriesData.indexOf(data[i]) !== -1) {
-              categoriesData.splice(categoriesData.indexOf(data[i]), 1);
-              localStorage.setItem(
-                "categoriesData",
-                JSON.stringify(categoriesData)
-              );
-            }
-            if (categoryDiv.children.length === 2) {
-              h4.style.display = "block";
-            }
-          });
-        });
+        // button.addEventListener("click", (event) => {
+        //   event.preventDefault();
+        //   console.log("in");
+        // });
       }
+      let clicked = storedCategoriesData.find(
+        (obj) => obj.title === data[i].title
+      )
+        ? true
+        : false;
+      console.log(clicked);
+      button.addEventListener("click", (event) => {
+        event.preventDefault();
+        button.firstElementChild.style.opacity = "1";
+        button.style.color = "white";
+        h4.style.display = "none";
+
+        const duplicateButton = event.target.parentElement.cloneNode(true);
+        // Create the X icon
+        const closeButton = document.createElement("span");
+        closeButton.textContent = "X";
+        closeButton.className = "close-button";
+
+        // Append the "X" to the cloned button
+        duplicateButton.lastElementChild.appendChild(closeButton);
+
+        // Append the cloned button to the categoryDiv
+        if (!clicked) {
+          console.log("lu");
+          categoryDiv.appendChild(duplicateButton);
+          storedCategoriesData.push(data[i]);
+          localStorage.setItem(
+            "categoriesData",
+            JSON.stringify(storedCategoriesData)
+          );
+        }
+        categoryDiv.addEventListener("click", (event) =>
+          event.preventDefault()
+        );
+        clicked = true;
+        duplicateButton.removeEventListener("click", getCategories);
+
+        // Add click event listener to the X icon for removal
+        closeButton.addEventListener("click", () => {
+          button.firstElementChild.style.opacity = "0.08";
+          button.style.color = data[i].text_color;
+          clicked = false;
+          categoryDiv.removeChild(duplicateButton);
+
+          storedCategoriesData.splice(storedCategoriesData.indexOf(data[i]), 1);
+          localStorage.setItem(
+            "categoriesData",
+            JSON.stringify(storedCategoriesData)
+          );
+
+          if (categoryDiv.children.length === 2) {
+            h4.style.display = "block";
+          }
+        });
+      });
     }
   } catch (error) {
     console.log(error.message);
