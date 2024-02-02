@@ -199,7 +199,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   line-height: 20px; /* 142.857% */
 }
 .arrow-div {
-  padding: 10px 14.5px 10px 5.5px;
+  padding: 5px 10.5px 5px 5.5px;
   background: white;
   border-radius: 0px 10px 10px 0px;
   position: absolute;
