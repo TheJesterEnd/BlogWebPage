@@ -12,7 +12,9 @@ const dateInput = document.querySelector("#date-input");
 const dropDownMenuContent = document.querySelector(".drop-down_menu");
 const categoryDiv = document.querySelector(".category-div");
 const h4 = document.querySelector("h4");
+let clicked = {};
 
+console.log(clicked);
 let imgUrl;
 let fileName;
 let storedCategoriesData;
@@ -58,9 +60,12 @@ document.addEventListener("DOMContentLoaded", () => {
     emailInput.defaultValue = storedEmailValue;
     emailValidation();
   }
-  storedCategoriesData = JSON.parse(localStorage.getItem("categoriesData"));
+  storedCategoriesData =
+    JSON.parse(localStorage.getItem("categoriesData")) || [];
   if (storedCategoriesData && storedCategoriesData.length > 0) {
     for (let i = 0; i < storedCategoriesData.length; i++) {
+      console.log(clicked);
+      clicked[storedCategoriesData[i].title] = true;
       const button = document.createElement("div");
       button.className = "button-container";
       button.style.color = "white";
@@ -95,6 +100,7 @@ document.addEventListener("DOMContentLoaded", () => {
             dropDownMenuContent.children[j].style.color = obj.text_color;
           }
         }
+        clicked[event.target.previousSibling.textContent] = false;
         categoryDiv.removeChild(button);
         const indexToRemove = storedCategoriesData.findIndex((item) => {
           return item.title === event.target.previousSibling.textContent;
@@ -112,6 +118,7 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     }
   }
+  getCategories();
 });
 
 inputFile.addEventListener("change", (event) => {
@@ -308,6 +315,9 @@ async function getCategories() {
     if (!response.ok) throw new Error("failed to fetch data");
     const data = await response.json();
     for (let i = 0; i < data.length - 2; i++) {
+      if (!clicked[data[i].title]) {
+        clicked[data[i].title] = false;
+      }
       const button = document.createElement("div");
       button.className = "button-container";
       button.style.color = data[i].text_color;
@@ -320,17 +330,12 @@ async function getCategories() {
       if (storedCategoriesData.find((obj) => obj.title === data[i].title)) {
         button.firstElementChild.style.opacity = "1";
         button.style.color = "white";
-        // button.addEventListener("click", (event) => {
-        //   event.preventDefault();
-        //   console.log("in");
-        // });
+        button.addEventListener("click", (event) => {
+          event.preventDefault();
+          console.log("in");
+        });
       }
-      let clicked = storedCategoriesData.find(
-        (obj) => obj.title === data[i].title
-      )
-        ? true
-        : false;
-      console.log(clicked);
+
       button.addEventListener("click", (event) => {
         event.preventDefault();
         button.firstElementChild.style.opacity = "1";
@@ -347,8 +352,7 @@ async function getCategories() {
         duplicateButton.lastElementChild.appendChild(closeButton);
 
         // Append the cloned button to the categoryDiv
-        if (!clicked) {
-          console.log("lu");
+        if (clicked[event.target.textContent.trim()] === false) {
           categoryDiv.appendChild(duplicateButton);
           storedCategoriesData.push(data[i]);
           localStorage.setItem(
@@ -359,14 +363,17 @@ async function getCategories() {
         categoryDiv.addEventListener("click", (event) =>
           event.preventDefault()
         );
-        clicked = true;
+        console.log(event.target.textContent);
+        clicked[event.target.textContent.trim()] = true;
+        console.log(clicked);
         duplicateButton.removeEventListener("click", getCategories);
 
         // Add click event listener to the X icon for removal
         closeButton.addEventListener("click", () => {
           button.firstElementChild.style.opacity = "0.08";
           button.style.color = data[i].text_color;
-          clicked = false;
+          console.log(event.target.textContent);
+          clicked[event.target.textContent.trim()] = false;
           categoryDiv.removeChild(duplicateButton);
 
           storedCategoriesData.splice(storedCategoriesData.indexOf(data[i]), 1);
@@ -382,11 +389,10 @@ async function getCategories() {
       });
     }
   } catch (error) {
-    console.log(error.message);
+    console.log(error);
   }
 }
 
-getCategories();
 let dateValue;
 dateInput.addEventListener("change", () => {
   dateValue = dateInput.value;
