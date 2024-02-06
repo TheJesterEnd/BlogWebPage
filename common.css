@@ -52,4 +52,5 @@ body {
   line-height: 16px; /* 133.333% */
   color: inherit;
   min-width: max-content;
+  border-radius: 30px;
 }

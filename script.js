@@ -1,4 +1,46 @@
 const cardBox = document.querySelector(".card-box");
+const buttons = document.querySelector(".buttons");
+let selectedCategories = [];
+async function fetchCategories() {
+  try {
+    const response = await fetch(
+      "https://george.pythonanywhere.com/api/categories/"
+    );
+    if (!response.ok) throw new Error("failed to fetch categories");
+    const data = await response.json();
+    for (let i = 0; i < data.length - 2; i++) {
+      buttons.innerHTML += `
+      <div class="button-container" style="color:${data[i].text_color}">
+         <div class="button-background" style="background:${data[i].background_color}"></div>
+         <button class="my-button category-button">${data[i].title}</button>
+      </div>
+      `;
+    }
+    buttons.addEventListener("click", (event) => {
+      event.preventDefault();
+      const button = event.target;
+      if (event.target.classList.contains("category-button")) {
+        button.classList.toggle("selected");
+      }
+      if (button.classList.contains("selected")) {
+        let objButton = data.find((btn) => btn.title === button.textContent);
+        selectedCategories.push(objButton);
+      } else {
+        const index = selectedCategories.findIndex(
+          (btn) => btn.title === button.textContent
+        );
+        if (index !== -1) {
+          selectedCategories.splice(index, 1);
+        }
+      }
+      console.log(selectedCategories);
+    });
+  } catch (error) {
+    console.log(error.message);
+  }
+}
+
+fetchCategories();
 async function fetchPosts() {
   try {
     const response = await fetch(
