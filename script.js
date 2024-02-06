@@ -19,13 +19,16 @@ async function fetchPosts() {
         <h1>${data[i].title}</h1>
         <div class="card-buttons">
           ${data[i].categories
-            .map(
-              (category) =>
-                `<button class="common-button" style="color:${category.text_color}; background:${category.background_color}">${category.title}</button>`
-            )
+            .map((category) => {
+              return `<div class="button-container" style="color:${category.text_color}">
+              <div class="button-background" style="background:${category.background_color}"></div>
+              <button class="common-button my-button category-button">${category.title}</button>
+             </div>
+            `;
+            })
             .join("")}
         </div>
-        <h2 class="text">${data[i].description.slice(0, 100)}</h2>
+        <h2 class="text">${data[i].description.slice(0, 100) + "..."}</h2>
         <div class="last-part">
           <button class="full-text">სრულად ნახვა</button>
           <img class="arrow" src="./images/Arrow.png" alt="arrow" />
