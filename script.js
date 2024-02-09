@@ -19,7 +19,7 @@ if (localStorage.getItem("token")) {
 }
 enterButton.addEventListener("click", () => {
   if (enterButton.textContent === "დაამატეთ ბლოგი") {
-    location.href = "pages/addNewblog/addNewBlog.html";
+    location.href = "./pages/addNewblog/addNewBlog.html";
   } else {
     loginModal.style.display = "block";
     login.style.display = "block";
