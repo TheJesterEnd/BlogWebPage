@@ -1,7 +1,92 @@
 const cardBox = document.querySelector(".card-box");
 const buttons = document.querySelector(".buttons");
+const enterButton = document.querySelector(".enter");
+const loginModal = document.querySelector(".login-container");
+const emailInput = document.querySelector("#email-input");
+const submit = document.querySelector("#submit");
+const closeX = document.querySelector("#close-icon");
+const errorSpan = document.querySelector("#error-span");
+const login = document.querySelector(".login");
+const succeedLogin = document.querySelector(".succeed");
+const X = document.querySelector(".x");
+const succeed = document.querySelector(".good");
+let emailValue;
+
 let postData;
 let selectedCategories = [];
+if (localStorage.getItem("token")) {
+  enterButton.textContent = "დაამატეთ ბლოგი";
+}
+enterButton.addEventListener("click", () => {
+  if (enterButton.textContent === "დაამატეთ ბლოგი") {
+    location.href = "pages/addNewblog/addNewBlog.html";
+  } else {
+    loginModal.style.display = "block";
+    login.style.display = "block";
+  }
+});
+closeX.addEventListener("click", () => {
+  loginModal.style.display = "none";
+  login.style.display = "none";
+});
+submit.addEventListener("click", (event) => {
+  event.preventDefault();
+  emailValidation();
+  if (emailValue !== undefined) {
+    fetchData();
+  }
+});
+const emailPattern = /^[\w.-]+@redberry\.ge$/;
+
+function emailValidation() {
+  if (emailPattern.test(emailInput.value)) {
+    emailValue = emailInput.value;
+  } else {
+    emailValue = undefined;
+    errorSpan.style.display = "flex";
+  }
+}
+async function fetchData() {
+  try {
+    const response = await fetch(
+      "https://george.pythonanywhere.com/api/login/",
+      {
+        method: "POST",
+        headers: {
+          accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: emailValue,
+        }),
+      }
+    );
+    console.log(response.status);
+    if (response.status === 500) throw new Error("ელ-ფოსტა არ მოიძებნა");
+    const data = await response.json();
+    console.log(data);
+    token = data.token;
+    localStorage.setItem("token", token);
+    login.style.display = "none";
+    succeedLogin.style.display = "block";
+  } catch (error) {
+    console.log(error.message);
+    errorSpan.lastChild.textContent = error.message;
+    errorSpan.style.display = "flex";
+  }
+}
+X.addEventListener("click", () => {
+  loginModal.style.display = "none";
+  changeButtonText();
+});
+succeed.addEventListener("click", (event) => {
+  event.preventDefault();
+  loginModal.style.display = "none";
+  changeButtonText();
+});
+function changeButtonText() {
+  enterButton.textContent = "დაამატეთ ბლოგი";
+}
 async function fetchCategories() {
   try {
     const response = await fetch(
@@ -9,7 +94,7 @@ async function fetchCategories() {
     );
     if (!response.ok) throw new Error("failed to fetch categories");
     const data = await response.json();
-    for (let i = 0; i < data.length - 2; i++) {
+    for (let i = 0; i < data.length - 4; i++) {
       buttons.innerHTML += `
       <div class="button-container" style="color:${data[i].text_color}">
          <div class="button-background" style="background:${data[i].background_color}"></div>
