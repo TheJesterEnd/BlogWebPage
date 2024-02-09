@@ -2,6 +2,7 @@ const dropArea = document.querySelector("#drop-area");
 const fileBox = document.querySelector(".file-box");
 const inputFile = document.querySelector("#input-file");
 const imgUploadContainer = document.querySelector(".img-upload-container");
+const backButton = document.querySelector("#img-arrow");
 const fileNameP = document.querySelector("#file-name_p");
 const remove = document.querySelector("#remove");
 const titleInput = document.querySelector("#title-input");
@@ -12,6 +13,9 @@ const dateInput = document.querySelector("#date-input");
 const dropDownMenuContent = document.querySelector(".drop-down_menu");
 const categoryDiv = document.querySelector(".category-div");
 const h4 = document.querySelector("h4");
+if (!localStorage.getItem("token")) {
+  location.href = "../../index.html";
+}
 let clicked = {};
 
 console.log(clicked);
@@ -120,7 +124,9 @@ document.addEventListener("DOMContentLoaded", () => {
   }
   getCategories();
 });
-
+backButton.addEventListener("click", () => {
+  location.href = "../../index.html";
+});
 inputFile.addEventListener("change", (event) => {
   const selectedFiles = event.target.files;
   if (selectedFiles.length > 0) {
