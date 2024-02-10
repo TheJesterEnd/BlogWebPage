@@ -19,7 +19,7 @@ if (!localStorage.getItem("token")) {
 let clicked = {};
 
 console.log(clicked);
-let imgUrl;
+let img;
 let fileName;
 let storedCategoriesData;
 // Load data from localStorage when the page loads
@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded", () => {
     imgUploadContainer.style.display = "flex";
     fileBox.style.display = "none";
     fileNameP.textContent = storedFileName;
-    imgUrl = storedImgUrl;
+    img = storedImgUrl;
   } else {
     fileBox.style.display = "flex";
     imgUploadContainer.style.display = "none";
@@ -132,7 +132,8 @@ inputFile.addEventListener("change", (event) => {
   if (selectedFiles.length > 0) {
     fileName = selectedFiles[0].name;
     fileNameP.textContent = fileName;
-    imgUrl = URL.createObjectURL(selectedFiles[0]);
+    img = selectedFiles[0];
+    storageImgAsString();
     dropFile();
   }
 });
@@ -146,17 +147,27 @@ dropArea.addEventListener("drop", (event) => {
   if (droppedFiles.length > 0) {
     fileName = droppedFiles[0].name;
     fileNameP.textContent = fileName;
-    imgUrl = URL.createObjectURL(droppedFiles[0]);
+    img = droppedFiles[0];
+    storageImgAsString();
     dropFile();
   }
 });
-
+function storageImgAsString() {
+  if (img) {
+    const reader = new FileReader();
+    reader.readAsDataURL(img);
+    reader.onload = () => {
+      const imageString = reader.result;
+      localStorage.setItem("imgUrl", imageString);
+    };
+  }
+}
 remove.addEventListener("click", removeFile);
 
 function dropFile() {
   fileBox.style.display = "none";
   imgUploadContainer.style.display = "flex";
-  localStorage.setItem("imgUrl", imgUrl);
+
   localStorage.setItem("fileName", fileName);
 }
 
