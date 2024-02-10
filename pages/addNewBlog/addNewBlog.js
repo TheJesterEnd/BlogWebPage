@@ -179,7 +179,7 @@ authorInput.addEventListener("input", () => {
 });
 authorInput.addEventListener("change", authorValidationFinal);
 
-const georgianRegex = /[\u10A0-\u10EA\u10FC\u10EE\u10EB]/;
+const georgianRegex = "აბგდევზთიკლმნოპჟრსტუფ ქღყშჩცძწჭხჯჰ";
 
 let isValidLength = false;
 let isValidGeorgian = false;
@@ -193,12 +193,17 @@ function authorValidation() {
     fourSymbol.style.color = "#85858D";
     isValidLength = false;
   }
-  if (georgianRegex.test(authorInput.value)) {
-    georgian.style.color = "#14D81C";
-    isValidGeorgian = true;
-  } else {
-    georgian.style.color = "#85858D";
-    isValidGeorgian = false;
+
+  let splitedValue = authorInput.value.trim().split("");
+  for (let i = 0; i < splitedValue.length; i++) {
+    if (georgianRegex.includes(splitedValue[i])) {
+      georgian.style.color = "#14D81C";
+      isValidGeorgian = true;
+    } else {
+      georgian.style.color = "#85858D";
+      isValidGeorgian = false;
+      break;
+    }
   }
   if (authorInput.value.trimStart().includes(" ")) {
     twoWord.style.color = "#14D81C";
@@ -208,6 +213,7 @@ function authorValidation() {
     isTwoWord = false;
   }
 }
+
 function authorValidationFinal() {
   if (isValidLength && isValidGeorgian && isTwoWord) {
     authorValue = authorInput.value.trim();
