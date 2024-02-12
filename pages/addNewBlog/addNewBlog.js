@@ -13,12 +13,12 @@ const dateInput = document.querySelector("#date-input");
 const dropDownMenuContent = document.querySelector(".drop-down_menu");
 const categoryDiv = document.querySelector(".category-div");
 const h4 = document.querySelector("h4");
+const submit = document.querySelector("#submit");
 if (!localStorage.getItem("token")) {
   location.href = "../../index.html";
 }
 let clicked = {};
-
-console.log(clicked);
+let imageString;
 let img;
 let fileName;
 let storedCategoriesData;
@@ -26,49 +26,57 @@ let storedCategoriesData;
 document.addEventListener("DOMContentLoaded", () => {
   const storedImgUrl = localStorage.getItem("imgUrl");
   const storedFileName = localStorage.getItem("fileName");
-
   if (storedImgUrl && storedFileName) {
+    submitButton();
+
     imgUploadContainer.style.display = "flex";
     fileBox.style.display = "none";
     fileNameP.textContent = storedFileName;
-    img = storedImgUrl;
+    imageString = storedImgUrl;
   } else {
     fileBox.style.display = "flex";
     imgUploadContainer.style.display = "none";
+    submitButton();
   }
   const storedAuthorValue = localStorage.getItem("authorValue");
   if (storedAuthorValue) {
     authorInput.defaultValue = storedAuthorValue;
     authorValidation();
     authorValidationFinal();
+    submitButton();
   }
   const storedTitleValue = localStorage.getItem("titleValue");
   if (storedTitleValue) {
     titleInput.defaultValue = storedTitleValue;
-    titleValidation(titleInput, titleInputPara);
-    titleValidationFinal(titleInput, titleInputPara);
+    titleValidation();
+    titleValidationFinal();
+    submitButton();
   }
   const storedDescriptionValue = localStorage.getItem("descriptionValue");
   if (storedDescriptionValue) {
     descriptionInput.defaultValue = storedDescriptionValue;
-    titleValidation(descriptionInput, descriptionInputPara);
-    titleValidationFinal(descriptionInput, descriptionInputPara);
+    descriptionValidation();
+    descriptionValidationFinal();
+    submitButton();
   }
   const storedDateValue = localStorage.getItem("dateValue");
   if (storedAuthorValue) {
     dateInput.defaultValue = storedDateValue;
     dateInputValidation();
+    submitButton();
   }
   const storedEmailValue = localStorage.getItem("emailValue");
   if (storedEmailValue) {
     emailInput.defaultValue = storedEmailValue;
     emailValidation();
+    submitButton();
   }
   storedCategoriesData =
     JSON.parse(localStorage.getItem("categoriesData")) || [];
   if (storedCategoriesData && storedCategoriesData.length > 0) {
+    submitButton();
+
     for (let i = 0; i < storedCategoriesData.length; i++) {
-      console.log(clicked);
       clicked[storedCategoriesData[i].title] = true;
       const button = document.createElement("div");
       button.className = "button-container";
@@ -119,10 +127,15 @@ document.addEventListener("DOMContentLoaded", () => {
         if (categoryDiv.children.length === 2) {
           h4.style.display = "block";
         }
+        submitButton();
       });
     }
   }
   getCategories();
+
+  submit.addEventListener("click", (event) => {
+    event.preventDefault();
+  });
 });
 backButton.addEventListener("click", () => {
   location.href = "../../index.html";
@@ -141,13 +154,15 @@ inputFile.addEventListener("change", (event) => {
 ["drag", "dragenter", "dragover", "drop"].forEach((eventName) => {
   dropArea.addEventListener(eventName, (event) => event.preventDefault());
 });
-
+let test;
 dropArea.addEventListener("drop", (event) => {
   const droppedFiles = event.dataTransfer.files;
   if (droppedFiles.length > 0) {
     fileName = droppedFiles[0].name;
     fileNameP.textContent = fileName;
     img = droppedFiles[0];
+    test = URL.createObjectURL(img);
+
     storageImgAsString();
     dropFile();
   }
@@ -157,9 +172,15 @@ function storageImgAsString() {
     const reader = new FileReader();
     reader.readAsDataURL(img);
     reader.onload = () => {
-      const imageString = reader.result;
+      imageString = reader.result;
       localStorage.setItem("imgUrl", imageString);
+      submitButton();
     };
+  } else {
+    const storedImgUrl = localStorage.getItem("imgUrl");
+    if (storedImgUrl) {
+      imageString = storedImgUrl;
+    }
   }
 }
 remove.addEventListener("click", removeFile);
@@ -167,6 +188,7 @@ remove.addEventListener("click", removeFile);
 function dropFile() {
   fileBox.style.display = "none";
   imgUploadContainer.style.display = "flex";
+  console.log(test);
 
   localStorage.setItem("fileName", fileName);
 }
@@ -176,8 +198,9 @@ function removeFile() {
   fileBox.style.display = "flex";
   localStorage.removeItem("imgUrl");
   localStorage.removeItem("fileName");
+  imageString = undefined;
+  submitButton();
 }
-
 //-------------------------------------------------This is where the validation of the author's input begins
 const authorInput = document.querySelector("#author-input");
 const fourSymbol = document.querySelector("#four-symbol");
@@ -188,7 +211,10 @@ authorInput.addEventListener("input", () => {
   authorValidation();
   localStorage.setItem("authorValue", authorInput.value);
 });
-authorInput.addEventListener("change", authorValidationFinal);
+authorInput.addEventListener("change", () => {
+  authorValidationFinal();
+  submitButton();
+});
 
 const georgianRegex = "აბგდევზთიკლმნოპჟრსტუფ ქღყშჩცძწჭხჯჰ";
 
@@ -234,6 +260,7 @@ function authorValidationFinal() {
       (li) => (li.style.color = "#85858D")
     );
   } else {
+    authorValue = undefined;
     authorInput.style.border = "1px solid #EA1919";
     authorInput.style.background = "#FAF2F3";
     if (isValidLength) {
@@ -254,44 +281,66 @@ function authorValidationFinal() {
   }
 }
 //----------------------------------------------------------------This is where title validation begins--------------------------------------
-
+let descriptionValue;
 let titleValue;
 titleInput.addEventListener("input", () => {
-  titleValidation(titleInput, titleInputPara);
+  titleValidation();
+
   localStorage.setItem("titleValue", titleInput.value);
 });
 titleInput.addEventListener("change", () => {
-  titleValidationFinal(titleInput, titleInputPara);
-  titleValue = titleInput.value.trim();
+  titleValidationFinal();
+  submitButton();
 });
 
-function titleValidation(input, inputPara) {
-  if (input.value.trim().length > 1) {
-    inputPara.style.color = "#14D81C";
+function titleValidation() {
+  if (titleInput.value.trim().length > 1) {
+    titleInputPara.style.color = "#14D81C";
+    titleValue = titleInput.value.trim();
   } else {
-    inputPara.style.color = "#85858D";
+    titleValue = undefined;
+
+    titleInputPara.style.color = "#85858D";
   }
 }
 
-function titleValidationFinal(input, inputPara) {
-  if (input.value.trim().length > 1) {
-    inputPara.style.color = "#85858D";
-    input.style.border = "1px solid #14D81C";
+function titleValidationFinal() {
+  if (titleInput.value.trim().length > 1) {
+    titleInputPara.style.color = "#85858D";
+    titleInput.style.border = "1px solid #14D81C";
   } else {
-    inputPara.style.color = "#EA1919";
-    input.style.border = "1px solid #EA1919";
+    titleInputPara.style.color = "#EA1919";
+    titleInput.style.border = "1px solid #EA1919";
   }
 }
 //-----------------------------------------------------------Here I just added an event listener to the description input-------------------
-let descriptionValue;
 descriptionInput.addEventListener("input", () => {
-  titleValidation(descriptionInput, descriptionInputPara);
+  descriptionValidation();
   localStorage.setItem("descriptionValue", descriptionInput.value);
 });
 descriptionInput.addEventListener("change", () => {
-  titleValidationFinal(descriptionInput, descriptionInputPara);
-  descriptionValue = descriptionInput.value.trim();
+  descriptionValidationFinal();
+  submitButton();
 });
+function descriptionValidation() {
+  if (descriptionInput.value.trim().length > 1) {
+    descriptionInputPara.style.color = "#14D81C";
+    descriptionValue = descriptionInput.value.trim();
+  } else {
+    descriptionValue = undefined;
+
+    descriptionInputPara.style.color = "#85858D";
+  }
+}
+function descriptionValidationFinal() {
+  if (descriptionInput.value.trim().length > 1) {
+    descriptionInputPara.style.color = "#85858D";
+    descriptionInput.style.border = "1px solid #14D81C";
+  } else {
+    descriptionInputPara.style.color = "#EA1919";
+    descriptionInput.style.border = "1px solid #EA1919";
+  }
+}
 //----------------------------------------------------------------This is where email validation begins--------------------------------------
 
 const emailInput = document.querySelector("#email-input");
@@ -301,6 +350,7 @@ let emailValue;
 emailInput.addEventListener("change", () => {
   emailValidation();
   localStorage.setItem("emailValue", emailValue);
+  submitButton();
 });
 function emailValidation() {
   if (emailPattern.test(emailInput.value)) {
@@ -355,7 +405,7 @@ async function getCategories() {
         button.style.color = "white";
         button.addEventListener("click", (event) => {
           event.preventDefault();
-          console.log("in");
+          submitButton();
         });
       }
 
@@ -364,6 +414,7 @@ async function getCategories() {
         button.firstElementChild.style.opacity = "1";
         button.style.color = "white";
         h4.style.display = "none";
+        submitButton();
 
         const duplicateButton = event.target.parentElement.cloneNode(true);
         // Create the X icon
@@ -383,19 +434,18 @@ async function getCategories() {
             JSON.stringify(storedCategoriesData)
           );
         }
-        categoryDiv.addEventListener("click", (event) =>
-          event.preventDefault()
-        );
-        console.log(event.target.textContent);
+        categoryDiv.addEventListener("click", (event) => {
+          event.preventDefault();
+          submitButton();
+        });
         clicked[event.target.textContent.trim()] = true;
-        console.log(clicked);
         duplicateButton.removeEventListener("click", getCategories);
 
         // Add click event listener to the X icon for removal
         closeButton.addEventListener("click", () => {
+          submitButton();
           button.firstElementChild.style.opacity = "0.08";
           button.style.color = data[i].text_color;
-          console.log(event.target.textContent);
           clicked[event.target.textContent.trim()] = false;
           categoryDiv.removeChild(duplicateButton);
 
@@ -418,13 +468,89 @@ async function getCategories() {
 
 let dateValue;
 dateInput.addEventListener("change", () => {
-  dateValue = dateInput.value;
   dateInputValidation();
   localStorage.setItem("dateValue", dateValue);
+  submitButton();
 });
 function dateInputValidation() {
-  dateInput.style.border = "1px solid #14D81C";
+  if (dateInput.value != "") {
+    dateInput.style.border = "1px solid #14D81C";
+    dateValue = dateInput.value;
+  } else {
+    dateInput.style.border = "1px solid #EA1919";
+  }
 }
+//--------------------------------------------------//
+let readyToSendBack;
+let objectToSend;
+storedCategoriesData = JSON.parse(localStorage.getItem("categoriesData")) || [];
+
+function submitButton() {
+  if (
+    authorValue != "" &&
+    authorValue != undefined &&
+    emailValue != "" &&
+    emailValue != undefined &&
+    localStorage.getItem("imgUrl") != "" &&
+    localStorage.getItem("imgUrl") != undefined &&
+    descriptionValue != "" &&
+    descriptionValue != undefined &&
+    storedCategoriesData != undefined &&
+    storedCategoriesData.length > 0 &&
+    imageString != undefined &&
+    imageString != "" &&
+    titleValue != "" &&
+    titleValue != undefined
+  ) {
+    console.log(imageString);
+    objectToSend = {
+      categories: storedCategoriesData.map((category) => ({
+        title: category.title,
+        text_color: category.text_color,
+        background_color: category.background_color,
+      })),
+      title: titleValue,
+      publish_date: dateValue,
+      description: descriptionValue,
+      image: "http://127.0.0.1:5501/82b8380a-dcf3-4bf6-9d55-6de84eec90a7",
+      email: emailValue,
+      author: authorValue,
+    };
+    readyToSendBack = true;
+    submit.style.background = "#5D37F3";
+  } else {
+    submit.style.background = "#E4E3EB";
+    readyToSendBack = false;
+  }
+}
+
+async function uploadBlog() {
+  try {
+    const response = await fetch(
+      "https://george.pythonanywhere.com/api/blogs/create/",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Token ${localStorage.getItem("token")}`,
+        },
+        body: JSON.stringify(objectToSend),
+      }
+    );
+    console.log(response);
+    if (!response.ok) throw new Error("failed to upload blog");
+  } catch (error) {
+    console.log(error.message);
+  }
+}
+submit.addEventListener("click", (event) => {
+  event.preventDefault();
+  if (readyToSendBack) {
+    console.log(objectToSend.image);
+    uploadBlog();
+  }
+});
+
 //authorValue
 // emailValue;
 // localStorage.getItem("imgUrl")
