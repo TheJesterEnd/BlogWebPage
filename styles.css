@@ -39,27 +39,7 @@ main {
   background: #f3f2fa;
   padding-top: 64px;
 }
-.login-container {
-  display: none;
-  width: 100vw;
-  height: 100vh;
-  background: rgba(26, 26, 31, 0.24);
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 9999;
-}
-.login {
-  display: none;
-  position: absolute;
-  top: 314px;
-  left: 480px;
-  width: 480px;
-  height: 272px;
-  border-radius: 12px;
-  background: #fff;
-  padding: 20px 24px 40px;
-}
+
 #close-icon {
   margin-left: 408px;
 }

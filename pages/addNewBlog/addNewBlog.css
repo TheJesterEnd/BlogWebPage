@@ -293,10 +293,29 @@ span p {
   border-radius: 8px;
   background: #e4e3eb;
   border: none;
-
   color: #fff;
   font-family: inherit;
   font-size: 14px;
+  font-weight: 500;
+  line-height: 20px; /* 142.857% */
+}
+.main {
+  height: 300px;
+  display: block;
+}
+#main-page {
+  display: flex;
+  width: 432px;
+  padding: 10px 20px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border-radius: 8px;
+  background: #5d37f3;
+  color: #fff;
+  border: none;
+  font-size: 14px;
+  margin-top: 48px;
   font-weight: 500;
   line-height: 20px; /* 142.857% */
 }

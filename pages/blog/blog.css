@@ -98,6 +98,7 @@ h1 {
 .card-buttons {
   margin-top: 24px;
   gap: 16px;
+  display: flex;
   margin-left: 360px;
 }
 
@@ -108,27 +109,6 @@ h1 {
   line-height: 16px;
   border-radius: 30px;
   border: none;
-}
-
-.market {
-  color: #d6961c;
-  width: 83px;
-  height: 32px;
-  background: rgba(255, 184, 47, 0.08);
-}
-
-.aplication {
-  color: #15c972;
-  width: 97px;
-  height: 32px;
-  background: rgba(28, 214, 125, 0.08);
-}
-
-.AI {
-  color: #b71fdd;
-  width: 178px;
-  height: 32px;
-  background: rgba(177, 28, 214, 0.08);
 }
 
 .main-text {
@@ -240,7 +220,7 @@ h3 {
   font-weight: 500;
   line-height: 20px;
   font-family: inherit;
-  border:  none;
+  border: none;
 }
 
 .arrow {

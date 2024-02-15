@@ -1,4 +1,5 @@
 const dropArea = document.querySelector("#drop-area");
+const form = document.querySelector("form");
 const fileBox = document.querySelector(".file-box");
 const inputFile = document.querySelector("#input-file");
 const imgUploadContainer = document.querySelector(".img-upload-container");
@@ -14,6 +15,10 @@ const dropDownMenuContent = document.querySelector(".drop-down_menu");
 const categoryDiv = document.querySelector(".category-div");
 const h4 = document.querySelector("h4");
 const submit = document.querySelector("#submit");
+const backToMainModal = document.querySelector(".login-container");
+const mainModal = document.querySelector(".main");
+const backToMain = document.querySelector("#main-page");
+const X = document.querySelector("#close-icon");
 if (!localStorage.getItem("token")) {
   location.href = "../../index.html";
 }
@@ -147,6 +152,7 @@ inputFile.addEventListener("change", (event) => {
     fileNameP.textContent = fileName;
     img = selectedFiles[0];
     storageImgAsString();
+    submitButton();
     dropFile();
   }
 });
@@ -161,12 +167,12 @@ dropArea.addEventListener("drop", (event) => {
     fileName = droppedFiles[0].name;
     fileNameP.textContent = fileName;
     img = droppedFiles[0];
-    test = URL.createObjectURL(img);
-
     storageImgAsString();
+    submitButton();
     dropFile();
   }
 });
+
 function storageImgAsString() {
   if (img) {
     const reader = new FileReader();
@@ -188,7 +194,6 @@ remove.addEventListener("click", removeFile);
 function dropFile() {
   fileBox.style.display = "none";
   imgUploadContainer.style.display = "flex";
-  console.log(test);
 
   localStorage.setItem("fileName", fileName);
 }
@@ -484,6 +489,7 @@ function dateInputValidation() {
 let readyToSendBack;
 let objectToSend;
 storedCategoriesData = JSON.parse(localStorage.getItem("categoriesData")) || [];
+let formData;
 
 function submitButton() {
   if (
@@ -491,31 +497,24 @@ function submitButton() {
     authorValue != undefined &&
     emailValue != "" &&
     emailValue != undefined &&
-    localStorage.getItem("imgUrl") != "" &&
-    localStorage.getItem("imgUrl") != undefined &&
     descriptionValue != "" &&
     descriptionValue != undefined &&
     storedCategoriesData != undefined &&
     storedCategoriesData.length > 0 &&
     imageString != undefined &&
-    imageString != "" &&
     titleValue != "" &&
     titleValue != undefined
   ) {
-    console.log(imageString);
     objectToSend = {
-      categories: storedCategoriesData.map((category) => ({
-        title: category.title,
-        text_color: category.text_color,
-        background_color: category.background_color,
-      })),
+      categories: storedCategoriesData,
       title: titleValue,
       publish_date: dateValue,
       description: descriptionValue,
-      image: "http://127.0.0.1:5501/82b8380a-dcf3-4bf6-9d55-6de84eec90a7",
+      image: imageString,
       email: emailValue,
       author: authorValue,
     };
+    console.log(JSON.parse(JSON.stringify(objectToSend)));
     readyToSendBack = true;
     submit.style.background = "#5D37F3";
   } else {
@@ -537,8 +536,9 @@ async function uploadBlog() {
         body: JSON.stringify(objectToSend),
       }
     );
-    console.log(response);
+    console.log(await response.json());
     if (!response.ok) throw new Error("failed to upload blog");
+    backToMainModal.style.display = "block";
   } catch (error) {
     console.log(error.message);
   }
@@ -546,11 +546,28 @@ async function uploadBlog() {
 submit.addEventListener("click", (event) => {
   event.preventDefault();
   if (readyToSendBack) {
-    console.log(objectToSend.image);
     uploadBlog();
   }
 });
-
+X.addEventListener("click", (event) => {
+  event.preventDefault();
+  mainPageModal();
+});
+backToMain.addEventListener("click", (event) => {
+  event.preventDefault();
+  mainPageModal();
+});
+function mainPageModal() {
+  location.href = "../../index.html";
+  localStorage.removeItem("dateValue");
+  localStorage.removeItem("fileName");
+  localStorage.removeItem("categoriesData");
+  localStorage.removeItem("imgUrl");
+  localStorage.removeItem("authorValue");
+  localStorage.removeItem("descriptionValue");
+  localStorage.removeItem("emailValue");
+  localStorage.removeItem("titleValue");
+}
 //authorValue
 // emailValue;
 // localStorage.getItem("imgUrl")
