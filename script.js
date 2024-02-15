@@ -179,7 +179,7 @@ function loopPosts(data) {
       </div>
       <h2 class="text">${data[i].description.slice(0, 100) + "..."}</h2>
       <div class="last-part">
-        <a href = "/pages/blog/blog.html?id=${
+        <a href = "./pages/blog/blog.html?id=${
           data[i].id
         }"><button class="full-text">სრულად ნახვა</button><a/>
         <img class="arrow" src="./images/Arrow.png" alt="arrow" />
