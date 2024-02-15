@@ -9,7 +9,6 @@ body {
   font-family: "FiraGO", sans-serif;
   min-height: 100vh;
   background: #f3f2fa;
-  width: 1440px;
 }
 
 header {
@@ -22,13 +21,10 @@ header {
 }
 
 .enter {
-  width: 93px;
-  height: 40px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  padding: 10px 20px;
   border-radius: 8px;
   background: #5d37f3;
+  border: none;
   color: #fff;
   font-size: 14px;
   font-weight: 500;
@@ -39,8 +35,13 @@ main {
   background: #f3f2fa;
   display: flex;
   flex-direction: column;
+  align-items: center;
 }
-
+#back-img {
+  position: absolute;
+  top: 120px;
+  left: 76px;
+}
 .main-fist-part {
   display: flex;
   justify-content: space-between;
@@ -58,7 +59,6 @@ main {
   width: 720px;
   height: 328px;
   margin-top: 40px;
-  margin-right: 360px;
 }
 
 .name-under-the-photo {
@@ -69,7 +69,6 @@ main {
   font-weight: 500;
   line-height: 20px;
   width: 164px;
-  margin-left: 360px;
   margin-top: 40px;
 }
 
@@ -79,7 +78,6 @@ main {
   font-style: normal;
   font-weight: 400;
   line-height: 16px;
-  margin-left: 360px;
   margin-top: 8px;
 }
 
@@ -91,7 +89,6 @@ h1 {
   font-weight: 700;
   line-height: 40px;
   width: 720px;
-  margin-left: 360px;
   margin-top: 24px;
 }
 
@@ -99,7 +96,6 @@ h1 {
   margin-top: 24px;
   gap: 16px;
   display: flex;
-  margin-left: 360px;
 }
 
 .common-button {
@@ -120,7 +116,6 @@ h1 {
   line-height: 28px;
   width: 720px;
   margin-top: 40px;
-  margin-left: 360px;
 }
 
 .title-arrow {

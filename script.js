@@ -21,7 +21,7 @@ enterButton.addEventListener("click", () => {
   if (enterButton.textContent === "დაამატეთ ბლოგი") {
     location.href = "./pages/addNewBlog/addNewBlog.html";
   } else {
-    loginModal.style.display = "block";
+    loginModal.style.display = "flex";
     login.style.display = "block";
   }
 });

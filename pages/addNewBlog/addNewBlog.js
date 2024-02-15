@@ -538,7 +538,7 @@ async function uploadBlog() {
     );
     console.log(await response.json());
     if (!response.ok) throw new Error("failed to upload blog");
-    backToMainModal.style.display = "block";
+    backToMainModal.style.display = "flex";
   } catch (error) {
     console.log(error.message);
   }
@@ -568,9 +568,3 @@ function mainPageModal() {
   localStorage.removeItem("emailValue");
   localStorage.removeItem("titleValue");
 }
-//authorValue
-// emailValue;
-// localStorage.getItem("imgUrl")
-//descriptionValue
-//titleValue
-//dateValue
