@@ -1,8 +1,8 @@
 let id;
-const test = document.querySelector(".test");
+const mainContainer = document.querySelector(".main-container");
 const loginModal = document.querySelector(".login-container");
 const enterButton = document.querySelector(".enter");
-const backImg = document.querySelector("#back-img");
+const backImg = document.querySelector(".back-img");
 const emailInput = document.querySelector("#email-input");
 const submit = document.querySelector("#submit");
 const closeX = document.querySelector("#close-icon");
@@ -18,10 +18,12 @@ async function getQuerryString() {
 if (localStorage.getItem("token")) {
   enterButton.textContent = "დაამატეთ ბლოგი";
 }
-backImg.addEventListener("click", () => {
-  console.log("b;a");
-  location.href = "../../index.html";
+window.addEventListener("click", (event) => {
+  if (event.target.classList.contains("back-img")) {
+    location.href = "../../index.html";
+  }
 });
+
 enterButton.addEventListener("click", () => {
   if (enterButton.textContent === "დაამატეთ ბლოგი") {
     location.href = "../../pages/addNewBlog/addNewBlog.html";
@@ -98,7 +100,7 @@ async function renderBlog(id) {
   );
   if (!response.ok) throw new Error("failed to fetch post");
   const data = await response.json();
-  test.innerHTML += `
+  mainContainer.innerHTML += `
 
         <img
           class="main-photo"
