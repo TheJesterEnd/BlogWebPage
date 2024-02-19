@@ -11,6 +11,7 @@ const login = document.querySelector(".login");
 const succeedLogin = document.querySelector(".succeed");
 const X = document.querySelector(".x");
 const succeed = document.querySelector(".good");
+const familiarBlogs = document.querySelector(".familiar-blog");
 async function getQuerryString() {
   let urlParams = new URLSearchParams(window.location.search);
   id = urlParams.get("id");
@@ -94,27 +95,30 @@ succeed.addEventListener("click", (event) => {
 function changeButtonText() {
   enterButton.textContent = "დაამატეთ ბლოგი";
 }
+let blogCategories;
+let openedBlogData;
 async function renderBlog(id) {
   const response = await fetch(
     `https://george.pythonanywhere.com/api/blogs/${id}/`
   );
   if (!response.ok) throw new Error("failed to fetch post");
-  const data = await response.json();
+  openedBlogData = await response.json();
+  blogCategories = openedBlogData.categories;
   mainContainer.innerHTML += `
 
         <img
           class="main-photo"
-          src="${data.image}"
+          src="${openedBlogData.image}"
           alt="photo"
         />
 
-      <p class="name-under-the-photo">${data.author}</p>
+      <p class="name-under-the-photo">${openedBlogData.author}</p>
       <p class="date-under-the-photo">
-        ${data.publish_date.slice(0, 10)} • ${data.email}
+        ${openedBlogData.publish_date.slice(0, 10)} • ${openedBlogData.email}
       </p>
-      <h1>${data.title}</h1>
+      <h1>${openedBlogData.title}</h1>
       <div class="card-buttons">
-        ${data.categories
+        ${openedBlogData.categories
           .map((cat) => {
             return `<div class="button-container" style="color:${cat.text_color}">
           <div class="button-background" style="background:${cat.background_color}"></div>
@@ -124,10 +128,71 @@ async function renderBlog(id) {
           .join("")}
       </div>
       <p class="main-text">
-       ${data.description}
+       ${openedBlogData.description}
       </p>
       
   `;
 }
 getQuerryString();
 renderBlog(id);
+// familiarBlogs
+async function fetchAllBlog() {
+  try {
+    const response = await fetch(
+      "https://george.pythonanywhere.com/api/blogs/"
+    );
+    if (!response.ok) throw new Error("failed to fetch blogs");
+    const data = await response.json();
+    let filtered = data.filter((blog) => {
+      return blog.categories.some((cat) => {
+        return blogCategories.some(
+          (openedCat) => openedCat.title === cat.title
+        );
+      });
+    });
+    let readyToRenderBlog = filtered.filter(
+      (blog) => blog.id !== openedBlogData.id
+    );
+    for (let i = 0; i < readyToRenderBlog.length; i++) {
+      familiarBlogs.innerHTML += `
+      <div class="card">
+      <img
+        class="mobile"
+        src="${readyToRenderBlog[i].image}"
+        alt="mobile"
+      />
+      <p class="name">${readyToRenderBlog[i].author}</p>
+      <p class="date">${readyToRenderBlog[i].publish_date}</p>
+      <h1 class="title-h1">${readyToRenderBlog[i].title}</h1>
+      <div class="card-buttons">
+        ${readyToRenderBlog[i].categories
+          .map((category) => {
+            return `<div class="button-container" style="color:${category.text_color}">
+            <div class="button-background" style="background:${category.background_color}"></div>
+            <button class="common-button my-button category-button">${category.title}</button>
+           </div>
+          `;
+          })
+          .join("")}
+      </div>
+      <h2 class="text">${
+        readyToRenderBlog[i].description.slice(0, 100) + "..."
+      }</h2>
+      <div class="last-part">
+        <a href = "../../pages/blog/blog.html?id=${
+          readyToRenderBlog[i].id
+        }"><button class="full-text">სრულად ნახვა</button><a/>
+        <img class="arrow" src="../../images/Arrow.png" alt="arrow" />
+      </div>
+    </div>
+    `;
+    }
+    console.log(readyToRenderBlog[0].id);
+    console.log(readyToRenderBlog);
+    console.log(blogCategories);
+    console.log(openedBlogData);
+  } catch (error) {
+    console.log(error);
+  }
+}
+fetchAllBlog();

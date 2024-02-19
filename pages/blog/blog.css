@@ -149,7 +149,10 @@ h1 {
 .arrow-left {
   border: none;
 }
-
+.familiar-blog {
+  display: flex;
+  overflow-x: hidden;
+}
 .card {
   display: flex;
   align-items: flex-start;
@@ -187,7 +190,13 @@ h3 {
   line-height: 28px;
   margin-top: 16px;
 }
-
+.title-h1 {
+  color: #1a1a1f;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 28px; /* 140% */
+  width: 408px;
+}
 .first-card-buttons {
   gap: 16px;
   margin-top: 16px;
