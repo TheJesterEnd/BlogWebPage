@@ -522,7 +522,7 @@ function submitButton() {
     readyToSendBack = false;
   }
 }
-
+let count = 0;
 async function uploadBlog() {
   try {
     const response = await fetch(
@@ -544,8 +544,9 @@ async function uploadBlog() {
   }
 }
 submit.addEventListener("click", (event) => {
+  count++;
   event.preventDefault();
-  if (readyToSendBack) {
+  if (readyToSendBack && count === 1) {
     uploadBlog();
   }
 });
