@@ -142,23 +142,32 @@ h1 {
   gap: 24px;
 }
 
-.arrow-right {
-  border: none;
-}
-
-.arrow-left {
-  border: none;
-}
 .familiar-blog {
+  width: 1340px;
+  margin-left: 76px;
   display: flex;
+  justify-content: center;
   overflow-x: hidden;
+}
+.content {
+  width: 1288px;
+  display: flex;
+
+  gap: 32px;
+  transform: translateX(0);
+  transition: transform 0.3s ease; /* Optional: for smooth transition */
+}
+.content a {
+  display: none;
+}
+.content .card a {
+  display: block;
 }
 .card {
   display: flex;
   align-items: flex-start;
   flex-direction: column;
   width: 408px;
-  margin-left: 76px;
   margin-top: 40px;
 }
 

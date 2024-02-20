@@ -12,6 +12,9 @@ const succeedLogin = document.querySelector(".succeed");
 const X = document.querySelector(".x");
 const succeed = document.querySelector(".good");
 const familiarBlogs = document.querySelector(".familiar-blog");
+const content = document.querySelector(".content");
+const scrollRight = document.querySelector("#scroll-right");
+const scrollLeft = document.querySelector("#scroll-left");
 async function getQuerryString() {
   let urlParams = new URLSearchParams(window.location.search);
   id = urlParams.get("id");
@@ -135,7 +138,7 @@ async function renderBlog(id) {
 }
 getQuerryString();
 renderBlog(id);
-// familiarBlogs
+let readyToRenderBlog;
 async function fetchAllBlog() {
   try {
     const response = await fetch(
@@ -150,11 +153,11 @@ async function fetchAllBlog() {
         );
       });
     });
-    let readyToRenderBlog = filtered.filter(
+    readyToRenderBlog = filtered.filter(
       (blog) => blog.id !== openedBlogData.id
     );
     for (let i = 0; i < readyToRenderBlog.length; i++) {
-      familiarBlogs.innerHTML += `
+      content.innerHTML += `
       <div class="card">
       <img
         class="mobile"
@@ -187,12 +190,44 @@ async function fetchAllBlog() {
     </div>
     `;
     }
-    console.log(readyToRenderBlog[0].id);
-    console.log(readyToRenderBlog);
-    console.log(blogCategories);
-    console.log(openedBlogData);
+    let scrollAmount = Math.ceil(readyToRenderBlog.length / 3) - 1;
+    let page = 0;
+    scrollRight.addEventListener("click", () => {
+      if (scrollAmount === 0) {
+        return;
+      }
+      page++;
+      if (scrollAmount === page) {
+        scrollLeft.firstElementChild.style.fill = "#5D37F3";
+        scrollRight.firstElementChild.style.fill = "#E4E3EB";
+      } else {
+        scrollLeft.firstElementChild.style.fill = "#E4E3EB";
+      }
+      content.style.transform = `translateX(${page * -1340}px)`;
+      scrollAmount--;
+    });
+    scrollLeft.addEventListener("click", () => {
+      if (page === 0) {
+        console.log(scrollAmount);
+        return;
+      }
+      page--;
+      if (scrollAmount === page) {
+        scrollRight.firstElementChild.style.fill = "#5D37F3";
+        scrollLeft.firstElementChild.style.fill = "#E4E3EB";
+      } else {
+        scrollRight.firstElementChild.style.fill = "#E4E3EB";
+      }
+      content.style.transform = `translateX(${page * -1340}px)`;
+      scrollAmount++;
+    });
   } catch (error) {
     console.log(error);
   }
 }
 fetchAllBlog();
+// console.log(Array.from(familiarBlogs));
+// async function scrollFamiliarBlogs() {
+//   await fetchAllBlog();
+//   console.log(scrollAmount);
+// }
