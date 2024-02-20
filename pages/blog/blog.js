@@ -192,6 +192,11 @@ async function fetchAllBlog() {
     }
     let scrollAmount = Math.ceil(readyToRenderBlog.length / 3) - 1;
     let page = 0;
+    if (scrollAmount === 0) {
+      scrollRight.firstElementChild.style.fill = "#E4E3EB";
+    } else {
+      scrollRight.style.cursor = "pointer";
+    }
     scrollRight.addEventListener("click", () => {
       if (scrollAmount === 0) {
         return;
@@ -199,9 +204,12 @@ async function fetchAllBlog() {
       page++;
       if (scrollAmount === page) {
         scrollLeft.firstElementChild.style.fill = "#5D37F3";
+        scrollLeft.style.cursor = "pointer";
         scrollRight.firstElementChild.style.fill = "#E4E3EB";
+        scrollRight.style.cursor = "default";
       } else {
         scrollLeft.firstElementChild.style.fill = "#E4E3EB";
+        scrollLeft.style.cursor = "default";
       }
       content.style.transform = `translateX(${page * -1340}px)`;
       scrollAmount--;
@@ -214,9 +222,12 @@ async function fetchAllBlog() {
       page--;
       if (scrollAmount === page) {
         scrollRight.firstElementChild.style.fill = "#5D37F3";
+        scrollRight.style.cursor = "pointer";
         scrollLeft.firstElementChild.style.fill = "#E4E3EB";
+        scrollLeft.style.cursor = "default";
       } else {
         scrollRight.firstElementChild.style.fill = "#E4E3EB";
+        scrollRight.style.cursor = "default";
       }
       content.style.transform = `translateX(${page * -1340}px)`;
       scrollAmount++;

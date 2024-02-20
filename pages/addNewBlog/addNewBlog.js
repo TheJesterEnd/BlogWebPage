@@ -348,7 +348,7 @@ function descriptionValidationFinal() {
 }
 //----------------------------------------------------------------This is where email validation begins--------------------------------------
 
-const emailInput = document.querySelector("#email-input");
+const emailInput = document.querySelector("#input-email");
 const emailInputPara = document.querySelector("#email-span");
 const emailPattern = /^[\w.-]+@redberry\.ge$/;
 let emailValue;
